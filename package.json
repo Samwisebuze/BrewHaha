@@ -1,26 +1,32 @@
 {
-  "name": "hackathon-starter",
-  "version": "5.1.2",
-  "description": "A boilerplate for Node.js web applications",
+  "name": "brewhaha",
+  "version": "0.0.1",
+  "description": "A project to find yourself a new barcrawl.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "git+https://github.com/Samwisebuze/BrewHaha"
   },
   "license": "MIT",
-  "author": "Sahat Yalkabov",
+  "author": "Samuel Buzas, Maddie Eckhart, Alex Vennemeyer",
   "contributors": [
-    "Yashar Fakhari (https://github.com/YasharF)"
+    "Maddie Eckhart",
+    "Alex Vennemeyer"
   ],
   "scripts": {
-    "postinstall": "npm rebuild node-sass",
-    "start": "node app.js",
+    "prod": "node ./start.js",
+    "watch": "nodemon ./start.js --ignore public/",
+    "start": "npm run watch",
+    "assets": "webpack -w --display-max-modules 0",
+    "sample": "node ./data/load-sample-data.js",
     "test": "nyc mocha --timeout=10000 --exit",
-    "lint": "eslint \"**/*.js\""
+    "blowitallaway": "node ./data/load-sample-data.js --delete",
+    "now": "now -e DB_USER=@db_user -e DB_PASS=@db_pass -e NODE_ENV=\"production\" -e PORT=80"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
     "@ladjs/bootstrap-social": "^7.0.2",
     "@octokit/rest": "^16.16.0",
+    "acorn": "^6.1.1",
     "axios": "^0.18.0",
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
@@ -68,6 +74,7 @@
     "popper.js": "^1.14.7",
     "pug": "^2.0.3",
     "request": "^2.88.0",
+    "sinon": "^7.3.1",
     "stripe": "^6.25.1",
     "tumblr.js": "^2.0.0",
     "twilio": "^3.28.1",
@@ -76,11 +83,13 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "concurrently": "^4.1.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-chai-friendly": "^0.4.1",
     "eslint-plugin-import": "^2.16.0",
     "mocha": "^6.0.2",
+    "nodemon": "^1.18.10",
     "nyc": "^13.3.0",
     "sinon": "^7.2.4",
     "sinon-mongoose": "^2.2.1",
@@ -89,5 +98,13 @@
   "engines": {
     "node": ">=8.11.3",
     "npm": ">=5.6.0"
+  },
+  "bugs": {
+    "url": "https://github.com/sahat/hackathon-starter/issues"
+  },
+  "homepage": "https://github.com/sahat/hackathon-starter#readme",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
   }
 }
