@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // import environmental variables from our variables.env file
-require('dotenv').config({ path: 'variables.env' });
+require('dotenv').config({ path: '.env' });
 
 // Connect to our Database and handle any bad connections
 mongoose.set('useCreateIndex', true);

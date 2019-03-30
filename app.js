@@ -25,7 +25,7 @@ const upload = multer({ dest: path.join(__dirname, 'uploads') });
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: 'variables.env.' });
+dotenv.load({ path: '.env' });
 
 /**
  * Controllers (route handlers).
@@ -65,8 +65,8 @@ app.use(expressValidator());
 // Sessions allow us to store data on visitors from request to request
 // This keeps users logged in and allows us to send flash messages
 app.use(session({
-  secret: process.env.SECRET,
-  key: process.env.KEY,
+  secret: process.env.SESSION_SECRET,
+  key: process.env.SESSION_KEY,
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
