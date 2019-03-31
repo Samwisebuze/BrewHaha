@@ -2,12 +2,10 @@ extends layout
 
 block content
   center.h1 Brew Haha
-  center 
+  center
     p.lead We're like Yelp...but a little more tipsy.
-  center.col
-    .col-lg-2
-      a.btn.btn-raised(href='/login', role='button') Log In
-    .col-lg-2
-      p
-    .col-lg-2
-      a.btn.btn-raised(href='/signup', role='button') Sign Up
+  hr
+  center
+    .btn-group-lg.d.flex(role='group')
+        a.btn.btn-dark(href='/login', role='button') Log In
+        a.btn.btn-info(href='/signup', role='button') Sign Up
