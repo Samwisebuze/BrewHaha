@@ -1,44 +1,75 @@
+/* eslint-disable no-underscore-dangle */
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  email: { type: String, unique: true },
+  email: {
+    type: String,
+    trim: true,
+    unique: true,
+    index: true,
+  },
+  username: {
+    type: String,
+    require: true,
+    unique: true,
+  },
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
 
-  snapchat: String,
-  facebook: String,
-  twitter: String,
-  google: String,
-  github: String,
-  instagram: String,
-  linkedin: String,
-  steam: String,
-  tokens: Array,
-
   profile: {
-    name: String,
+    name: {
+      first: {
+        type: String,
+        require: true,
+      },
+      last: {
+        type: String,
+        require: true,
+      },
+    },
     gender: String,
     location: String,
-    website: String,
-    picture: String
-  }
-}, { timestamps: true });
+    birthdate: {
+      type: Date,
+      require: true,
+    },
+    preferences: {
+      drinks: [String],
+      bars: [String],
+    },
+    favorites: {
+      drinks: [String],
+      bars: [String],
+    },
+    roles: [{
+      type: String,
+      require: true,
+      default: 'Drinker',
+    }],
+  },
+}, {
+  timestamps: true,
+});
 
 /**
  * Password hash middleware.
  */
 userSchema.pre('save', function save(next) {
   const user = this;
-  if (!user.isModified('password')) { return next(); }
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) { return next(err); }
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) { return next(err); }
+
+  if (!user.isModified('password')) return next();
+
+  return bcrypt.genSalt(10, (err, salt) => {
+    if (err) return next(err);
+
+    return bcrypt.hash(user.password, salt, (hash) => {
+      if (err) return next(err);
+
       user.password = hash;
-      next();
+      return next();
     });
   });
 });
@@ -55,10 +86,7 @@ userSchema.methods.comparePassword = function comparePassword(candidatePassword,
 /**
  * Helper method for getting user's gravatar.
  */
-userSchema.methods.gravatar = function gravatar(size) {
-  if (!size) {
-    size = 200;
-  }
+userSchema.methods.gravatar = function gravatar(size = 200) {
   if (!this.email) {
     return `https://gravatar.com/avatar/?s=${size}&d=retro`;
   }
