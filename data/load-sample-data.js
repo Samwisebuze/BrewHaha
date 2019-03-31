@@ -7,6 +7,7 @@ const fs = require('fs');
 
 const mongoose = require('mongoose');
 
+mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
