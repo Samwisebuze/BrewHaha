@@ -2,13 +2,19 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Sign up
+    h3 Brew Haha
+    p
+    center.h4 Sign Up
   form(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
       .col-md-7
         input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='username') Username
+      .col-md-7
+        input.form-control(type='username', name='username', id='username', placeholder='Username', autofocus, autocomplete='username', required)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='password') Password
       .col-md-7
@@ -17,6 +23,24 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirm Password
       .col-md-7
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', autocomplete='new-password', required)
+    hr
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='first') First Name
+      .col-md-7
+        input.form-control(type='first', name='first', id='first', placeholder='First Name', autofocus, autocomplete='first', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='last') Last Name
+      .col-md-7
+        input.form-control(type='last', name='last', id='last', placeholder='Last Name', autofocus, autocomplete='last', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='zip') Zip Code
+      .col-md-7
+        input.form-control(type='zip', name='zip', id='zip', placeholder='Zip Code', autofocus, autocomplete='zip', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='date') Birthday
+      .col-md-7
+        input.form-control(type='date', name='date', id='date', placeholder='yyyy-mm-dd', autofocus, autocomplete='date', required)
+    
     .form-group.offset-sm-3.col-md-7.pl-2
       button.btn.btn-success(type='submit')
         i.fas.fa-user-plus.fa-sm

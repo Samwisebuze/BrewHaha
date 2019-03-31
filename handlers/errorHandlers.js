@@ -49,6 +49,7 @@ exports.flashValidationErrors = (err, req, res, next) => {
   we can show good info on what happened
 */
 exports.developmentErrors = (err, _req, res, _next) => {
+  // eslint-disable-next-line no-param-reassign
   err.stack = err.stack || '';
   const errorDetails = {
     message: err.message,

@@ -1,0 +1,13 @@
+{
+  "email": "testuser@email.com",
+  "username": "testuser",
+  "password" : "password",
+  "profile": {
+    "name":{
+      "first": "Test",
+      "last": "User"
+    },
+    "location": "45219",
+    "birthdate": "2013-01-08"
+  }
+}
