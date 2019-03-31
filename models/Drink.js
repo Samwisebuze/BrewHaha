@@ -6,15 +6,15 @@ mongoose.Promise = global.Promise;
 const drinkSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   slug: {
     type: String,
-    require: true,
+    required: true,
   },
   type: {
     type: String,
-    require: true,
+    required: true,
   },
   tags: [{
     type: String,
@@ -24,7 +24,7 @@ const drinkSchema = new mongoose.Schema({
   }],
   distributor: {
     type: String,
-    require: true,
+    required: true,
   },
 });
 
