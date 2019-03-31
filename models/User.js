@@ -15,7 +15,10 @@ const userSchema = new mongoose.Schema({
     require: true,
     unique: true,
   },
-  password: String,
+  password: {
+    type: String,
+    require: true,
+  },
   passwordResetToken: String,
   passwordResetExpires: Date,
 
@@ -31,7 +34,10 @@ const userSchema = new mongoose.Schema({
       },
     },
     gender: String,
-    location: String,
+    location: {
+      type: String,
+      require: true,
+    },
     birthdate: {
       type: Date,
       require: true,
