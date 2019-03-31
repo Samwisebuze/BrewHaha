@@ -7,7 +7,7 @@ const Menu = mongoose.model('Menu');
 //== Create ==//
 // GET
 exports.addMenu = async (req, res) => {
-  res.render('editMenu', { title: 'Add Menu' });
+  res.render('menu/editMenu', { title: 'Add Menu' });
 };
 
 // POST
@@ -25,6 +25,7 @@ exports.editMenu = async (req, res) => {
     res.flash('error', 'sorry, it seems this menu does\'t exsist');
     res.redirect('/menu/Add');
   }
+  res.render('menu/menu', { title: `${menu.name}`, menu });
 };
 
 // POST
@@ -45,7 +46,7 @@ exports.getMenu = async (req, res) => {
   const menu = await Menu.findOne({ _id: req.params._id }).exec();
   if (menu == null) {
     res.flash('error', 'sorry, it seems this menu doesn\'t exist');
-    res.render('menu', { title: 'Menu', menu });
+    res.render('menu/menu', { title: 'Menu', menu });
   }
 };
 
