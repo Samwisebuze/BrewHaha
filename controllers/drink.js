@@ -18,7 +18,7 @@ const Drink = mongoose.model('Drink');
 //== Create ==//
 // GET drink
 exports.addDrink = (req, res) => {
-  res.render('editDrink', {
+  res.render('drink/editDrink', {
     title: 'Add Drink',
   });
 };
@@ -41,8 +41,7 @@ exports.editDrink = async (req, res) => {
     res.flash('error', 'It appears this drink doesn\'t exist. Let\'s add it!');
     res.redirect('/drinks/add');
   }
-
-  res.render('drink', {
+  res.render('drink/drink', {
     title: `${drink.name}`,
     drink,
   });
@@ -80,8 +79,7 @@ exports.getDrinkById = async (req, res) => {
   if (drink == null) {
     res.flash('error', 'It appears this drink does\'t exist. Let\'s add it!');
   }
-
-  res.render('drink', {
+  res.render('drink/drink', {
     title: `${drink.name}`,
     drink,
   });
@@ -117,22 +115,23 @@ function getAllTagDefaults(tagSeed) {
 }
 // GET - list
 exports.getDrinks = async (req, res) => {
-  const tagDefault = getAllTagDefaults(
-    getTagSeeds(req.query.drinkType),
-  );
-  const tagsQuery = req.query.tags.split(',') || tagDefault;
+  const tagsQuery = req.query.tags.split(',')
+    || getAllTagDefaults(getTagSeeds(req.query.drinkType));
+
   const page = req.query.page || 1;
   const limit = req.query.limit || 25;
 
-  const drinks = await Drink.find({
-    tags: {
-      $in: tagsQuery,
-    },
-  }.paginate({
-    page,
-    limit,
-  }));
+  const drinks = await Drink.find()
+    .where('tags').in(tagsQuery)
+    .paginate({
+      page,
+      limit,
+    });
   res.render('drinks', {
+    title: 'Drinks',
+    drinks,
+  });
+  res.render('drink/drinks', {
     title: 'Drinks',
     drinks,
   });
