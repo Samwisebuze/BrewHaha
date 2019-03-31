@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Bar = require('../models/Bar');
 
+mongoose.Promise = global.Promise;
+
 /**
  * GET /
  * Home page.

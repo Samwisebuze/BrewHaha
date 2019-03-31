@@ -40,6 +40,7 @@ drinkSchema.pre('save', async function preSave(next) {
       || !this.isModified('tags')) return next();
   // If Name is Modified Then regen slug
   if (!this.isModified('slug')) {
+    this.slug = slug(this.name);
     const slugRegExp = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i');
     // Find other stores with the same slug
     const stores = await this.constructor.find()
