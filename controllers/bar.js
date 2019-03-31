@@ -63,7 +63,7 @@ exports.getBars = async (req, res) => {
 };
 
 // === DELETE ===
-exports.deleteStore = async (req, res) => {
+exports.deleteBar = async (req, res) => {
   // Find and Delete Store
   const bar = await Bar.findOneAndDelete({ _id: req.params._id }).exec();
   if (bar === null) {

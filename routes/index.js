@@ -22,10 +22,15 @@ router.post('/add', catchErrors(bar.createBar));
 // Bar - Edit
 router.get('/bars/:id/edit', catchErrors(bar.editBar));
 router.post('/bars/add/:id', catchErrors(bar.updateBar));
+// Bart - Delete
+router.delete('/bars/delete/:id', catchErrors(bar.deleteStore))
 
 // Menu
 
 // Drink
+// Drink - Get
+// Drink - Edit
+// Drink -
 
 // User
 router.get('/login', user.getLogin);
