@@ -1,4 +1,4 @@
-{ "users" : [
+[
     {"email": "alex@vennemeyer.com",
         "username": "vennemar",
         "password" : "alex",
@@ -32,7 +32,7 @@
                 "last": "Buzas"
             },
             "location": "45219",
-            "birthdate": "2013-01-08"
+            "birthdate": "1996-12-02"
         }
     }
-]}
+]

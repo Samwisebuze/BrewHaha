@@ -45,8 +45,12 @@ async function loadData() {
     await User.insertMany(users);
   } catch (e) {
     console.log('\nError! If the error info is below, '
-      + 'Try dropping the existing database.\\n\t run npm blowitallaway\n\n\n');  
+      + 'Try dropping the existing database.\\n\t run npm blowitallaway\n\n\n');
+
+    console.log(e);
+    process.exit();
   }
+  process.exit();
 }
 
 if (process.argv.includes('--delete')) {

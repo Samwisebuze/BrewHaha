@@ -1,26 +1,229 @@
-{"bars": [
-    {"name":"Hop Scotch",
-        "description":"a bar on calhoun street",
-        "address":"251 Calhoun St, Cincinnati, OH 45219"
+[{
+        "name": "Hop Scotch",
+        "description": "a bar on calhoun street",
+        "cost": "Low",
+        "location": {
+            "coordinates": [23.98, 84.51],
+            "address": "251 Calhoun St, Cincinnati, OH 45219"
+        },
+        "hours": [{
+            "day": "Monday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Tuesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Wednesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Thursday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Friday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Saturday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Sunday",
+            "open": "14",
+            "close": "0"
+        }]
     },
-    {"name":"The Dime",
-        "description":"a bar on calhoun street",
-        "address":"2611 Vine St, Cincinnati, OH 45219"
+    {
+        "name": "The Dime",
+        "description": "a bar on calhoun street",
+        "cost": "Low",
+        "location": {
+            "coordinates": [23.98, 84.51],
+            "address": "2611 Vine St, Cincinnati, OH 45219"
+        },
+        "hours": [{
+            "day": "Monday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Tuesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Wednesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Thursday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Friday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Saturday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Sunday",
+            "open": "14",
+            "close": "0"
+        }]
     },
-    { "name":"Ladder 19",
-        "description":"A firehouse themed bar with ample beers and fireball whiskey on tap.",
-        "address":"2701 Vine St, Cincinnati, OH 45219"
+    {
+        "name": "Ladder 19",
+        "description": "A firehouse themed bar with ample beers and fireball whiskey on tap.",
+        "cost": "Low",
+        "location": {
+            "coordinates": [23.98, 84.51],
+            "address": "2701 Vine St, Cincinnati, OH 45219"
+        },
+        "hours": [{
+            "day": "Monday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Tuesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Wednesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Thursday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Friday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Saturday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Sunday",
+            "open": "14",
+            "close": "0"
+        }]
     },
-    { "name":"Mr Sushi",
-        "description":"a bar that also serves sushi",
-        "address":"138 W McMillan St, Cincinnati, OH 45219"
+    {
+        "name": "Mr Sushi",
+        "description": "a bar that also serves sushi",
+        "cost": "Low",
+        "location": {
+            "coordinates": [23.98, 84.51],
+            "address": "138 W McMillan St, Cincinnati, OH 45219"
+        },
+        "hours": [{
+            "day": "Monday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Tuesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Wednesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Thursday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Friday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Saturday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Sunday",
+            "open": "14",
+            "close": "0"
+        }]
     },
-    { "name":"Dive Bar",
-        "description":"relaxed watering hole with exposed-brick walls & an outdoor patio offers",
-        "address":"2608 Vine St, Cincinnati, OH 45219"
+    {
+        "name": "Dive Bar",
+        "cost": "Low",
+        "description": "relaxed watering hole with exposed-brick walls & an outdoor patio offers",
+        "location": {
+            "coordinates": [23.98, 84.51],
+            "address": "2608 Vine St, Cincinnati, OH 45219"
+        },
+        "hours": [{
+            "day": "Monday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Tuesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Wednesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Thursday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Friday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Saturday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Sunday",
+            "open": "14",
+            "close": "0"
+        }]
     },
-    { "name":"Macs",
-        "description":"a bar on calhoun street",
-        "address":"205 W McMillan St, Cincinnati, OH 45219"
+    {
+        "name": "Macs",
+        "description": "a bar on calhoun street",
+        "cost": "Low",
+        "location": {
+            "coordinates": [23.98, 84.51],
+            "address": "205 W McMillan St, Cincinnati, OH 45219"
+        },
+        "hours": [{
+            "day": "Monday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Tuesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Wednesday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Thursday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Friday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Saturday",
+            "open": "14",
+            "close": "0"
+        }, {
+            "day": "Sunday",
+            "open": "14",
+            "close": "0"
+        }]
     }
-]}
+]
