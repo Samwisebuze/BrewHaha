@@ -20,8 +20,8 @@ router.get('/bars', catchErrors(bar.getBars));
 router.get('/bar/:slug', catchErrors(bar.getBarBySlug));
 router.get('/bar/:id', catchErrors(bar.getBarById));
 // Bar - Add
-router.get('/add', bar.addBar);
-router.post('/add', catchErrors(bar.createBar));
+router.get('/bars/add', bar.addBar);
+router.post('/bars/add', catchErrors(bar.createBar));
 // Bar - Edit
 router.get('/bars/:id/edit', catchErrors(bar.editBar));
 router.post('/bars/add/:id', catchErrors(bar.updateBar));
