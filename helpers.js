@@ -19,7 +19,7 @@ exports.dump = (obj) => { JSON.stringify(obj, null, 2); };
 
 // Get tags choices
 exports.getSeedData = (name) => {
-  const contents = fs.readFileSync(`./data/seed/${name}Tags.json`);
+  const contents = fs.readFileSync(`./data/seed/${name}.json`);
   const json = JSON.parse(contents);
   return json;
 };

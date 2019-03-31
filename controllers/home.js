@@ -7,3 +7,12 @@ exports.index = (req, res) => {
     title: 'Home',
   });
 };
+
+/**
+ * GET/
+ * List Home Page
+ * - Authenticated Homepage
+ */
+exports.getHome = (req, res) => res.render('list', {
+  title: 'Bars Near You',
+});
