@@ -4,7 +4,7 @@ mixin barCard(bar = {})
     .bar
       .row
         .col-xs-4
-          img(src=`/uploads/${store.photo || 'bar.png'}`)
+          img(src=`/uploads/${bar.photo || 'bar.png'}`)
         .col-xs-8
           h2.title
             a(href=`/bar/${bar.slug}`) #{bar.name}
@@ -12,7 +12,7 @@ mixin barCard(bar = {})
           +cost(bar.cost)
         .bar__hero
             .bar__actions
-                .store__action.store__action--edit
+                .bar__action.bar__action--edit
                     a(href=`/bars/${store._id}/edit`)
                         != h.icon('pencil') || 'edit'
             img(src=`/uploads/${store.photo || 'bar.png'}`)

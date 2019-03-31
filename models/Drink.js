@@ -31,14 +31,18 @@ const drinkSchema = new mongoose.Schema({
 /**
  * preSave Hook
  * - Modifes bar.slug IFF name a has been modified.
+ * - Don't Create new models if nothing has changed
  */
 drinkSchema.pre('save', function preSave(next) {
-  // skip it and stop this function from running
-  if (!this.isModified('name')) return next();
+  // No Change, skip it and stop this function from running
+  if (!this.isModified('ingredients')
+      || !this.isModified('distributor')
+      || !this.isModified('tags')) return next();
+  // If Name is Modified Then regen slug
+  if (this.isModified('name')) this.slug = slug(this.name);
 
-  this.slug = slug(this.name);
+  // TODO: Make so slugs are resilient
   return next();
-  // TODO: Make more resilient so slugs are resilient
 });
 
 module.exports = mongoose.model('Drink', drinkSchema);
