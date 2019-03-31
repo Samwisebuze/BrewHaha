@@ -1,6 +1,6 @@
 /* eslint-env jquery, browser */
+import autocomplete from './modules/autocomplete';
+import { $, $$ } from './modules/bling';
 $(document).ready(() => {
-
-  // Place JavaScript code here...
-
+  autocomplete($('#address'), $('#lat'), $('#lng'));
 });
