@@ -123,10 +123,7 @@ exports.getDrinks = async (req, res) => {
 
   const drinks = await Drink.find()
     .where('tags').in(tagsQuery)
-    .paginate({
-      page,
-      limit,
-    });
+    .exec();
   res.render('drinks', {
     title: 'Drinks',
     drinks,
