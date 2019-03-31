@@ -1,6 +1,7 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 const {
-  promisify
+  promisify,
 } = require('util');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
@@ -31,7 +32,7 @@ exports.postLogin = (req, res, next) => {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Password cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail({
-    gmail_remove_dots: false
+    gmail_remove_dots: false,
   });
 
   const errors = req.validationErrors();
@@ -54,7 +55,7 @@ exports.postLogin = (req, res, next) => {
         return next(loginErr);
       }
       req.flash('success', {
-        msg: 'Success! You are logged in.'
+        msg: 'Success! You are logged in.',
       });
       return res.redirect(req.session.returnTo || '/');
     });
@@ -97,7 +98,7 @@ exports.postSignup = (req, res, next) => {
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
   req.sanitize('email').normalizeEmail({
-    gmail_remove_dots: false
+    gmail_remove_dots: false,
   });
 
   const errors = req.validationErrors();
@@ -113,14 +114,14 @@ exports.postSignup = (req, res, next) => {
   });
 
   User.findOne({
-    email: req.body.email
+    email: req.body.email,
   }, (err, existingUser) => {
     if (err) {
       return next(err);
     }
     if (existingUser) {
       req.flash('errors', {
-        msg: 'Account with that email address already exists.'
+        msg: 'Account with that email address already exists.',
       });
       return res.redirect('/signup');
     }
@@ -156,7 +157,7 @@ exports.getAccount = (req, res) => {
 exports.postUpdateProfile = (req, res, next) => {
   req.assert('email', 'Please enter a valid email address.').isEmail();
   req.sanitize('email').normalizeEmail({
-    gmail_remove_dots: false
+    gmail_remove_dots: false,
   });
 
   const errors = req.validationErrors();
@@ -178,14 +179,14 @@ exports.postUpdateProfile = (req, res, next) => {
       if (saveErr) {
         if (saveErr.code === 11000) {
           req.flash('errors', {
-            msg: 'The email address you have entered is already associated with an account.'
+            msg: 'The email address you have entered is already associated with an account.',
           });
           return res.redirect('/account');
         }
         return next(saveErr);
       }
       req.flash('success', {
-        msg: 'Profile information has been updated.'
+        msg: 'Profile information has been updated.',
       });
       return res.redirect('/account');
     });
@@ -217,7 +218,7 @@ exports.postUpdatePassword = (req, res, next) => {
         return next(saveErr);
       }
       req.flash('success', {
-        msg: 'Password has been changed.'
+        msg: 'Password has been changed.',
       });
       return res.redirect('/account');
     });
@@ -230,14 +231,14 @@ exports.postUpdatePassword = (req, res, next) => {
  */
 exports.postDeleteAccount = (req, res, next) => {
   User.deleteOne({
-    _id: req.user.id
+    _id: req.user.id,
   }, (err) => {
     if (err) {
       return next(err);
     }
     req.logout();
     req.flash('info', {
-      msg: 'Your account has been deleted.'
+      msg: 'Your account has been deleted.',
     });
     return res.redirect('/');
   });
@@ -249,7 +250,7 @@ exports.postDeleteAccount = (req, res, next) => {
  */
 exports.getOauthUnlink = (req, res, next) => {
   const {
-    provider
+    provider,
   } = req.params;
   User.findById(req.user.id, (err, user) => {
     if (err) {
@@ -267,7 +268,7 @@ exports.getOauthUnlink = (req, res, next) => {
     ) {
       req.flash('errors', {
         msg: `The ${_.startCase(_.toLower(provider))} account cannot be unlinked without another form of login enabled.` +
-          ' Please link another account or add an email address and password.'
+          ' Please link another account or add an email address and password.',
       });
       return res.redirect('/account');
     }
@@ -277,7 +278,7 @@ exports.getOauthUnlink = (req, res, next) => {
         return next(saveErr);
       }
       req.flash('info', {
-        msg: `${_.startCase(_.toLower(provider))} account has been unlinked.`
+        msg: `${_.startCase(_.toLower(provider))} account has been unlinked.`,
       });
       return res.redirect('/account');
     });
@@ -405,123 +406,123 @@ exports.postReset = (req, res, next) => {
   //     });
   // };
 
-//   resetPassword()
-//     .then(sendResetPasswordEmail)
-//     .then(() => {
-//       if (!res.finished) res.redirect('/');
-//     })
-//     .catch(err => next(err));
-// };
+  //   resetPassword()
+  //     .then(sendResetPasswordEmail)
+  //     .then(() => {
+  //       if (!res.finished) res.redirect('/');
+  //     })
+  //     .catch(err => next(err));
+  // };
 
-/**
- * GET /forgot
- * Forgot Password page.
- */
-exports.getForgot = (req, res) => {
-  if (req.isAuthenticated()) {
-    return res.redirect('/');
-  }
-  res.render('account/forgot', {
-    title: 'Forgot Password'
-  });
-};
-
-/**
- * POST /forgot
- * Create a random token, then the send user an email with a reset link.
- */
-exports.postForgot = (req, res, next) => {
-  req.assert('email', 'Please enter a valid email address.').isEmail();
-  req.sanitize('email').normalizeEmail({
-    gmail_remove_dots: false
-  });
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/forgot');
-  }
-
-  const createRandomToken = randomBytesAsync(16)
-    .then(buf => buf.toString('hex'));
-
-  const setRandomToken = token =>
-    User
-    .findOne({
-      email: req.body.email
-    })
-    .then((user) => {
-      if (!user) {
-        req.flash('errors', {
-          msg: 'Account with that email address does not exist.'
-        });
-      } else {
-        user.passwordResetToken = token;
-        user.passwordResetExpires = Date.now() + 3600000; // 1 hour
-        user = user.save();
-      }
-      return user;
-    });
-
-  const sendForgotPasswordEmail = (user) => {
-    if (!user) {
-      return;
+  /**
+   * GET /forgot
+   * Forgot Password page.
+   */
+  exports.getForgot = (req, res) => {
+    if (req.isAuthenticated()) {
+      return res.redirect('/');
     }
-    const token = user.passwordResetToken;
-    let transporter = nodemailer.createTransport({
-      service: 'SendGrid',
-      auth: {
-        user: process.env.SENDGRID_USER,
-        pass: process.env.SENDGRID_PASSWORD
-      }
+    res.render('account/forgot', {
+      title: 'Forgot Password',
     });
-    const mailOptions = {
-      to: user.email,
-      from: 'hackathon@starter.com',
-      subject: 'Reset your password on Hackathon Starter',
-      text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
-        Please click on the following link, or paste this into your browser to complete the process:\n\n
-        http://${req.headers.host}/reset/${token}\n\n
-        If you did not request this, please ignore this email and your password will remain unchanged.\n`
-    };
-    return transporter.sendMail(mailOptions)
-      .then(() => {
-        req.flash('info', {
-          msg: `An e-mail has been sent to ${user.email} with further instructions.`
-        });
-      })
-      .catch((err) => {
-        if (err.message === 'self signed certificate in certificate chain') {
-          console.log('WARNING: Self signed certificate in certificate chain. Retrying with the self signed certificate. Use a valid certificate if in production.');
-          transporter = nodemailer.createTransport({
-            service: 'SendGrid',
-            auth: {
-              user: process.env.SENDGRID_USER,
-              pass: process.env.SENDGRID_PASSWORD
-            },
-            tls: {
-              rejectUnauthorized: false
-            }
-          });
-          return transporter.sendMail(mailOptions)
-            .then(() => {
-              req.flash('info', {
-                msg: `An e-mail has been sent to ${user.email} with further instructions.`
-              });
-            });
-        }
-        console.log('ERROR: Could not send forgot password email after security downgrade.\n', err);
-        req.flash('errors', {
-          msg: 'Error sending the password reset message. Please try again shortly.'
-        });
-        return err;
-      });
   };
 
-  createRandomToken
-    .then(setRandomToken)
-    .then(sendForgotPasswordEmail)
-    .then(() => res.redirect('/forgot'))
-    .catch(next);
+  /**
+   * POST /forgot
+   * Create a random token, then the send user an email with a reset link.
+   */
+  exports.postForgot = (req, res, next) => {
+    req.assert('email', 'Please enter a valid email address.').isEmail();
+    req.sanitize('email').normalizeEmail({
+      gmail_remove_dots: false,
+    });
+
+    const errors = req.validationErrors();
+
+    if (errors) {
+      req.flash('errors', errors);
+      return res.redirect('/forgot');
+    }
+
+    const createRandomToken = randomBytesAsync(16)
+      .then(buf => buf.toString('hex'));
+
+    const setRandomToken = token => User.findOne({
+      email: req.body.email,
+    })
+      .then((user) => {
+        if (!user) {
+          req.flash('errors', {
+            msg: 'Account with that email address does not exist.',
+          });
+        } else {
+          user.passwordResetToken = token;
+          user.passwordResetExpires = Date.now() + 3600000; // 1 hour
+          user = user.save();
+        }
+        return user;
+      });
+
+    const sendForgotPasswordEmail = (user) => {
+      if (!user) {
+        return;
+      }
+      const token = user.passwordResetToken;
+      let transporter = nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+          user: process.env.SENDGRID_USER,
+          pass: process.env.SENDGRID_PASSWORD,
+        },
+      });
+      const mailOptions = {
+        to: user.email,
+        from: 'hackathon@starter.com',
+        subject: 'Reset your password on Hackathon Starter',
+        text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
+        Please click on the following link, or paste this into your browser to complete the process:\n\n
+        http://${req.headers.host}/reset/${token}\n\n
+        If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+      };
+      return transporter.sendMail(mailOptions)
+        .then(() => {
+          req.flash('info', {
+            msg: `An e-mail has been sent to ${user.email} with further instructions.`,
+          });
+        })
+        .catch((err) => {
+          if (err.message === 'self signed certificate in certificate chain') {
+            console.log('WARNING: Self signed certificate in certificate chain. Retrying with the self signed certificate. Use a valid certificate if in production.');
+            transporter = nodemailer.createTransport({
+              service: 'SendGrid',
+              auth: {
+                user: process.env.SENDGRID_USER,
+                pass: process.env.SENDGRID_PASSWORD,
+              },
+              tls: {
+                rejectUnauthorized: false,
+              },
+            });
+            return transporter.sendMail(mailOptions)
+              .then(() => {
+                req.flash('info', {
+                  msg: `An e-mail has been sent to ${user.email} with further instructions.`,
+                });
+              });
+          }
+          // eslint-disable-next-line no-console
+          console.log('ERROR: Could not send forgot password email after security downgrade.\n', err);
+          req.flash('errors', {
+            msg: 'Error sending the password reset message. Please try again shortly.',
+          });
+          return err;
+        });
+    };
+
+    createRandomToken
+      .then(setRandomToken)
+      .then(sendForgotPasswordEmail)
+      .then(() => res.redirect('/forgot'))
+      .catch(next);
+  };
 };
