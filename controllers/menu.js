@@ -32,7 +32,8 @@ exports.editMenu = async (req, res) => {
 
 // POST
 exports.updateMenu = async (req, res) => {
-  const menu = await Menu.findOneAndUpdate({ _id: req.params._id }, req.body)
+  const menu = await Menu.findOneAndUpdate({}, req.body)
+    .where('_id').equals(req.params.id)
     .exec();
   if (menu == null) {
     res.flash('error', 'could not update menu');
@@ -46,7 +47,8 @@ exports.updateMenu = async (req, res) => {
 
 // GET
 exports.getMenu = async (req, res) => {
-  const menu = await Menu.findOne({ _id: req.params._id })
+  const menu = await Menu.findOne()
+    .where('_id').equals(req.params.id)
     .populate('items.drink')
     .exec();
   if (menu == null) {
@@ -57,7 +59,8 @@ exports.getMenu = async (req, res) => {
 
 // DELETE
 exports.deleteMenu = async (req, res) => {
-  const menu = await Menu.findOneAndDelete({ _id: req.params._id })
+  const menu = await Menu.findOneAndDelete()
+    .where('_id').equals(req.params.id)
     .exec();
   if (menu == null) {
     res.flash('error', 'I\'m sorry Dave, I can\'t do that.');
