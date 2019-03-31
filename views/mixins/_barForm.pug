@@ -1,4 +1,5 @@
 mixin barForm(bar = {})
+		- const barSeedData = h.getSeedData('bar').tags
 	form(action=`/add/${bar._id || ''}`, method="POST" 
 	class="card")
 		label(for="name") Name
@@ -16,10 +17,9 @@ mixin barForm(bar = {})
 		input(type="text" hidden id="lat" name="location[coordinates][1]" 
 		value=(bar.location && bar.location.coordinates[1]) required)
 		
-		- const choices = ['Wifi', 'Family Friendly', 'Dive', 'Lounge', 'College']
 		- const tags = bar.tags || []
 		ul.tags
-			each choice in choices
+			each choice in barSeedData.tags
 				.tag.tag__choice
 					input(
 						type="checkbox" 

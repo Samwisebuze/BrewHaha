@@ -1,0 +1,11 @@
+mixin cost(cost="Low")
+  .cost__hero
+    case cost
+      when "Low"
+        .fa.fa-dollar-sign
+      when "Medium"
+        - for (int i = 0; i < 2;i++)
+          .fa.fa-dollar-sign
+      when "High"
+        - for (int i = 0; i < 3;i++)
+          .fa.fa-dollar-sign
