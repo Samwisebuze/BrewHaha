@@ -355,64 +355,64 @@ exports.postReset = (req, res, next) => {
       }));
     });
 
-  // const sendResetPasswordEmail = (user) => {
-  // `  if (!user) {
-  //     return;
-  //   }
-  //   let transporter = nodemailer.createTransport({
-  //     service: 'SendGrid',
-  //     auth: {
-  //       user: process.env.SENDGRID_USER,
-  //       pass: process.env.SENDGRID_PASSWORD
-  //     }
-  //   });
-  //   const mailOptions = {
-  //     to: user.email,
-  //     from: 'hackathon@starter.com',
-  //     subject: 'Your Hackathon Starter password has been changed',
-  //     text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
-  //   };
-  //   return transporter.sendMail(mailOptions)
-  //     .then(() => {
-  //       req.flash('success', {
-  //         msg: 'Success! Your password has been changed.'
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       if (err.message === 'self signed certificate in certificate chain') {
-  //         console.log('WARNING: Self signed certificate in certificate chain. Retrying with the self signed certificate. Use a valid certificate if in production.');
-  //         transporter = nodemailer.createTransport({
-  //           service: 'SendGrid',
-  //           auth: {
-  //             user: process.env.SENDGRID_USER,
-  //             pass: process.env.SENDGRID_PASSWORD
-  //           },
-  //           tls: {
-  //             rejectUnauthorized: false
-  //           }
-  //         });
-  //         return transporter.sendMail(mailOptions)
-  //           .then(() => {
-  //             req.flash('success', {
-  //               msg: 'Success! Your password has been changed.'
-  //             });
-  //           });
-  //       }
-  //       console.log('ERROR: Could not send password reset confirmation email after security downgrade.\n', err);
-  //       req.flash('warning', {
-  //         msg: 'Your password has been changed, however we were unable to send you a confirmation email. We will be looking into it shortly.'
-  //       });
-  //       return err;
-  //     });
-  // };
+  const sendResetPasswordEmail = (user) => {
+    if (!user) {
+      return;
+    }
+    let transporter = nodemailer.createTransport({
+      service: 'SendGrid',
+      auth: {
+        user: process.env.SENDGRID_USER,
+        pass: process.env.SENDGRID_PASSWORD
+      }
+    });
+    const mailOptions = {
+      to: user.email,
+      from: 'hackathon@starter.com',
+      subject: 'Your Hackathon Starter password has been changed',
+      text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
+    };
+    return transporter.sendMail(mailOptions)
+      .then(() => {
+        req.flash('success', {
+          msg: 'Success! Your password has been changed.'
+        });
+      })
+      .catch((err) => {
+        if (err.message === 'self signed certificate in certificate chain') {
+          console.log('WARNING: Self signed certificate in certificate chain. Retrying with the self signed certificate. Use a valid certificate if in production.');
+          transporter = nodemailer.createTransport({
+            service: 'SendGrid',
+            auth: {
+              user: process.env.SENDGRID_USER,
+              pass: process.env.SENDGRID_PASSWORD
+            },
+            tls: {
+              rejectUnauthorized: false
+            }
+          });
+          return transporter.sendMail(mailOptions)
+            .then(() => {
+              req.flash('success', {
+                msg: 'Success! Your password has been changed.'
+              });
+            });
+        }
+        console.log('ERROR: Could not send password reset confirmation email after security downgrade.\n', err);
+        req.flash('warning', {
+          msg: 'Your password has been changed, however we were unable to send you a confirmation email. We will be looking into it shortly.'
+        });
+        return err;
+      });
+  };
 
-  //   resetPassword()
-  //     .then(sendResetPasswordEmail)
-  //     .then(() => {
-  //       if (!res.finished) res.redirect('/');
-  //     })
-  //     .catch(err => next(err));
-  // };
+    resetPassword()
+      .then(sendResetPasswordEmail)
+      .then(() => {
+        if (!res.finished) res.redirect('/');
+      })
+      .catch(err => next(err));
+  };
 
   /**
    * GET /forgot
