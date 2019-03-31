@@ -1,5 +1,5 @@
 mixin barForm(bar = {})
-		- const barSeedData = h.getSeedData('bar').tags
+	- const barSeedData = h.getSeedData('bar').tags
 	form(action=`/add/${bar._id || ''}`, method="POST" 
 	class="card")
 		label(for="name") Name

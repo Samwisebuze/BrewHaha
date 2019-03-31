@@ -38,8 +38,17 @@ exports.updateBar = async (req, res) => {
 
 // === READ ===
 // GET - One
-exports.getStore = async (req, res) => {
+exports.getStoreBySlug = async (req, res) => {
   const bar = await Bar.findOne({ slug: req.params.slug });
+  if (bar === null) {
+    res.flash('error', 'It appears this bar doesn\'t exist. Let\'s make one!');
+    res.redirect('/bars/add');
+  }
+  res.render('bar', { title: `${bar.name}`, bar });
+};
+// GET - One
+exports.getStoreById = async (req, res) => {
+  const bar = await Bar.findOne({ _id: req.params.id });
   if (bar === null) {
     res.flash('error', 'It appears this bar doesn\'t exist. Let\'s make one!');
     res.redirect('/bars/add');
