@@ -15,6 +15,10 @@ const barSchema = new mongoose.Schema({
     trim: true,
   },
   tags: [String],
+  cost: {
+    type: String,
+    require: true,
+  },
   menus: [Number],
   reviews: [{
     rating: {

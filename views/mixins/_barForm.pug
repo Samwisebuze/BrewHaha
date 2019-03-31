@@ -1,0 +1,32 @@
+mixin barForm(bar = {})
+	form(action=`/add/${bar._id || ''}`, method="POST" 
+	class="card")
+		label(for="name") Name
+		input(type="text" name="name" value=bar.name)
+		label(for="description") Description
+		textarea(type="text" name="description")= bar.description
+		//- Address
+		label(for="address") Address 
+		input(type="text" id="address" name="location[address]" 
+		value=(bar.location && bar.location.address))
+		//- Addres LNG
+		input(type="text" hidden id="lng" name="location[coordinates][0]" 
+		value=(bar.location && bar.location.coordinates[0]) required)
+		//- Addres LAT
+		input(type="text" hidden id="lat" name="location[coordinates][1]" 
+		value=(bar.location && bar.location.coordinates[1]) required)
+		
+		- const choices = ['Wifi', 'Family Friendly', 'Dive', 'Lounge', 'College']
+		- const tags = bar.tags || []
+		ul.tags
+			each choice in choices
+				.tag.tag__choice
+					input(
+						type="checkbox" 
+						id=choice 
+						value=choice 
+						name="tags"
+						checked=(tags.includes(choice))
+					)
+					label(for=choice) #{choice}
+		input(type="submit", value="Save" class="button")
