@@ -20,11 +20,11 @@ const expressValidator = require('express-validator'); // ?
 const expressStatusMonitor = require('express-status-monitor'); // ?
 const sass = require('node-sass-middleware'); // ?
 const multer = require('multer'); // ? for uploads
-const promisify = require('promisify');
 const helpers = require('./helpers');
 const routes = require('./routes/index');
 const errorHandlers = require('./handlers/errorHandlers');
 
+// eslint-disable-next-line no-unused-vars
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
@@ -35,7 +35,8 @@ dotenv.load({ path: '.env' });
 // /**
 //  * API keys and Passport configuration.
 //  */
-// const passportConfig = require('./config/passport');
+// eslint-disable-next-line no-unused-vars
+const passportConfig = require('./config/passport');
 
 /**
  * Create Express server.
@@ -117,9 +118,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// promisify some callback based APIs
-app.use((req, _res, next) => {
-  req.login = promisify(req.login, req);
+app.use((req, res, next) => {
+  // After successful login, redirect back to the intended page
+  if (!req.user
+    && req.path !== '/login'
+    && req.path !== '/signup'
+    && !req.path.match(/^\/auth/)
+    && !req.path.match(/\./)) {
+    req.session.returnTo = req.originalUrl;
+  } else if (req.user
+    && (req.path === '/account' || req.path.match(/^\/list/))) {
+    req.session.returnTo = req.originalUrl;
+  }
   next();
 });
 
