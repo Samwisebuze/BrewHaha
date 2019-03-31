@@ -1,6 +1,14 @@
 extends ../layout
 
 include mixins/_barList
+include mixins/_barCard
+include mixins/_rating
+include mixins/_cost
 
+- const barAverage = h.rating(bar.reviews);
 block content
     +barlist(bars)
+        for b in bars
+            +barCar(b)
+                +rating(barAverage)
+                +cost(bar.cost)

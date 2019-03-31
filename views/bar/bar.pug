@@ -1,6 +1,13 @@
 extends ../layout
 
 include mixins/_barCard
+include mixins/_cost
+include mixins/_rating
+
 
 block content
+  #{h.StaticMap(bar.location.coordinates)}
   +barCard(bar)
+    +rating(barAverage)
+    +cost(bar.cost)
+

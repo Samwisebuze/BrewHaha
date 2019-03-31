@@ -33,6 +33,16 @@ exports.staticMap = ([lng, lat]) => `https://maps.googleapis.com/maps/api/static
 // inserting an SVG
 exports.icon = (name) => { fs.readFileSync(`./public/icons/${name}.svg`); };
 
+// Get Bar Ratings
+exports.rating = (bar) => {
+  let t = 0;
+  const length = bar.reviews.length || 1;
+  bar.reviews.foreach((item) => {
+    t += item.rating;
+  });
+  return t / length;
+};
+
 // Some details about the site
 exports.siteName = 'BrewHaha';
 

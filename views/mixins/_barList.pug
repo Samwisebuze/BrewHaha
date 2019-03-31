@@ -1,4 +1,6 @@
-mixin barList(bars = [])
-    .barlist
-        for bar in bars
-            +barCard(bar)
+mixin barList(defualt='There are no bars to find!')
+  .barlist
+    if block
+      block
+    else
+      p default
