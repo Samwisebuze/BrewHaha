@@ -12,7 +12,7 @@ exports.addDrink = (req, res) => {
  exports.postDrink = async (req, res) => {
     const drink = await (new Drink(req.body)).save();
     req.flash('sucess', `Added ${drink.name}`);
-    res.redirect()
+    res.redirect(`/drinks/${drink.slug}`)
 
  }
 
@@ -35,5 +35,7 @@ exports.updateDrink = async (req, res) {
     req.flash('sucess', `Updated ${drink.name}`);
     req.redirect(`/drinks/${drink._id}/edit`);
 }
+
+
 
  // flash types: sucess, failure, info, warning
