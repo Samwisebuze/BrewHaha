@@ -16,7 +16,7 @@ exports.dump = (obj) => { JSON.stringify(obj, null, 2); };
 exports.getSeedData = (name) => {
   const contents = fs.readFileSync(`./data/seed/${name}Tags.json`);
   const json = JSON.parse(contents);
-  return json.tags;
+  return json;
 };
 
 // Making a static map is really long - this is a handy helper function to make one
