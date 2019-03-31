@@ -18,9 +18,13 @@ const Drink = mongoose.model('Drink');
 //== Create ==//
 // GET drink
 exports.addDrink = (req, res) => {
+<<<<<<< HEAD
   res.render('editDrink', {
     title: 'Add Drink',
   });
+=======
+  res.render('drink/editDrink', { title: 'Add Drink' });
+>>>>>>> 5ecdd294095d651337ed427ee9cc38bb424500da
 };
 
 // POST
@@ -41,11 +45,15 @@ exports.editDrink = async (req, res) => {
     res.flash('error', 'It appears this drink doesn\'t exist. Let\'s add it!');
     res.redirect('/drinks/add');
   }
+<<<<<<< HEAD
 
   res.render('drink', {
     title: `${drink.name}`,
     drink,
   });
+=======
+  res.render('drink/drink', { title: `${drink.name}`, drink });
+>>>>>>> 5ecdd294095d651337ed427ee9cc38bb424500da
 };
 // POST
 exports.updateDrink = async (req, res) => {
@@ -80,11 +88,15 @@ exports.getDrinkById = async (req, res) => {
   if (drink == null) {
     res.flash('error', 'It appears this drink does\'t exist. Let\'s add it!');
   }
+<<<<<<< HEAD
 
   res.render('drink', {
     title: `${drink.name}`,
     drink,
   });
+=======
+  res.render('drink/drink', { title: `${drink.name}`, drink });
+>>>>>>> 5ecdd294095d651337ed427ee9cc38bb424500da
 };
 
 function getTagSeeds(drinkType = '') {
@@ -117,6 +129,7 @@ function getAllTagDefaults(tagSeed) {
 }
 // GET - list
 exports.getDrinks = async (req, res) => {
+<<<<<<< HEAD
   const tagDefault = getAllTagDefaults(
     getTagSeeds(req.query.drinkType),
   );
@@ -136,6 +149,10 @@ exports.getDrinks = async (req, res) => {
     title: 'Drinks',
     drinks,
   });
+=======
+  const drinks = await Drink.find();
+  res.render('drink/drinks', { title: 'Drinks', drinks });
+>>>>>>> 5ecdd294095d651337ed427ee9cc38bb424500da
 };
 
 // DELETE
