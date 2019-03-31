@@ -17,33 +17,39 @@ const barSchema = new mongoose.Schema({
   tags: [String],
   cost: {
     type: String,
-    required: true,
+    required: 'Please Select A Cost.',
   },
-  menus: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Menu',
-  }],
-  reviews: [{
-    rating: {
-      type: Number,
-      min: { type: Number, min: 1 },
-      max: { type: Number, max: 5 },
-      require: true,
-    },
-    title: String,
-    body: String,
-  }], // Id of Rating
+  menus: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Menu',
+    }],
+    default: [],
+  },
+  reviews: {
+    type: [{
+      rating: {
+        type: Number,
+        min: { type: Number, min: 1 },
+        max: { type: Number, max: 5 },
+        default: 3,
+      },
+      title: String,
+      body: String,
+    }],
+    default: [],
+  }, // Id of Rating
   hours: [{
     day: {
       type: String,
       required: '8 days a week',
     },
     open: {
-      type: Date,
+      type: Number,
       require: 'What Time do you Open?',
     },
     close: {
-      type: Date,
+      type: Number,
       required: 'What Time do you Open?',
     },
   }],

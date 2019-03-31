@@ -1,22 +1,48 @@
-{ "menus": [
-    {"type": "beer",
-        "items": [
-            {"name":"Budweiser",
+   [{
+        "type": "beer",
+        "items": [{
+                "name": "Budweiser",
                 "price": 5.67,
-                "tags": "Lager"
+                "tags": "Lager",
+                "type": "beer"
             },
-            {"name":"Truth",
+            {
+                "name": "Truth",
                 "price": 8.45,
-                "tags": "IPA"
+                "tags": "IPA",
+                "type": "beer"
+
             },
-            {"name":"PsychHOPathy",
+            {
+                "name": "PsychHOPathy",
                 "price": 7.56,
-                "tags": "IPA"  
+                "tags": "IPA",
+                "type": "beer"
+
             },
-            {"name":"Nopal",
+            {
+                "name": "Nopal",
                 "price": 7.86,
-                "tags": "Pale Ale"
+                "tags": "Pale Ale",
+                "type": "beer"
+
             }
         ]
-    }
-]}
+    }, {
+        "type": "wine",
+        "items": [{
+            "name": "Casa Blanca",
+            "price": 5.67,
+            "tags": "Merlot",
+            "type": "wine"
+
+        },
+        {
+            "name": "Flipflop",
+            "price": 8.45,
+            "tags": "Pinot Grigio",
+            "type": "wine"
+
+        }
+    ]
+    }]

@@ -1,49 +1,58 @@
-{"drinks":[
-    {"name":"Budweiser",
+[{
+        "name": "Budweiser",
         "type": "lager",
-        "Destributor":"Budweiser"
+        "Destributor": "Budweiser"
     },
-    {"name":"Truth",
+    {
+        "name": "Truth",
         "type": "beer",
         "tags": "IPA",
-        "Destributor":"Rhinegeist"
+        "Destributor": "Rhinegeist"
     },
-    {"name":"PsychHOPathy",
+    {
+        "name": "PsychHOPathy",
         "type": "beer",
         "tags": "IPA",
-        "Destributor":"MadTree"
+        "Destributor": "MadTree"
     },
-    {"name":"Nopal",
+    {
+        "name": "Nopal",
         "type": "beer",
         "tags": "Pale Ale",
-        "Destributor":"MadTree"
+        "Destributor": "MadTree"
     },
-    {"name":"Jameson",
+    {
+        "name": "Jameson",
         "type": "spirit",
         "tags": "Whiskey",
-        "Destributor":"Jameson Co"
+        "Destributor": "Jameson Co"
     },
-    {"name":"Jack Daniels",
+    {
+        "name": "Jack Daniels",
         "type": "spirit",
         "tags": "Whiskey",
-        "Destributor":"Jack Daniels Co"
+        "Destributor": "Jack Daniels Co"
     },
-    {"name":"Smirnoff",
+    {
+        "name": "Smirnoff",
         "type": "spirit",
         "tags": "vodka",
-        "Destributor":"Smirnoff"
+        "Destributor": "Smirnoff"
     },
-    {"name":"Grey Goose",
+    {
+        "name": "Grey Goose",
         "type": "spirit",
         "tags": "vodka",
-        "Destributor":"Grey Goose"
+        "Destributor": "Grey Goose"
     },
-    {"name":"Chardonnay",
+    {
+        "name": "Chardonnay",
         "type": "wine",
-        "Destributor":"Beringer"
+        "Destributor": "Beringer"
     },
-    {"name":"Merlot",
+    {
+        "name": "Merlot",
         "type": "wine",
-        "Destributor":"Yellow Tail"
+        "Destributor": "Yellow Tail"
     }
-]}
+]
