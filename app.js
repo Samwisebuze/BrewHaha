@@ -24,6 +24,7 @@ const helpers = require('./helpers');
 const routes = require('./routes/index');
 const errorHandlers = require('./handlers/errorHandlers');
 
+// eslint-disable-next-line no-unused-vars
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
@@ -34,7 +35,8 @@ dotenv.load({ path: '.env' });
 // /**
 //  * API keys and Passport configuration.
 //  */
-// const passportConfig = require('./config/passport');
+// eslint-disable-next-line no-unused-vars
+const passportConfig = require('./config/passport');
 
 /**
  * Create Express server.
@@ -115,7 +117,8 @@ app.use((req, res, next) => {
   res.locals.currentPath = req.path;
   next();
 });
-app.use((req, _res, next) => {
+
+app.use((req, res, next) => {
   // After successful login, redirect back to the intended page
   if (!req.user
     && req.path !== '/login'
@@ -124,7 +127,7 @@ app.use((req, _res, next) => {
     && !req.path.match(/\./)) {
     req.session.returnTo = req.originalUrl;
   } else if (req.user
-    && (req.path === '/account' || req.path.match(/^\/api/))) {
+    && (req.path === '/account' || req.path.match(/^\/list/))) {
     req.session.returnTo = req.originalUrl;
   }
   next();

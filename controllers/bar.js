@@ -57,8 +57,15 @@ exports.getStoreById = async (req, res) => {
 };
 // GET - List
 exports.getBars = async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 25;
+  const nameQuery = req.query.name || '';
   // Get list of all stores
-  const bars = await Bar.find();
+  const bars = await Bar.find()
+    .where('name').equals(new RegExp(`^${nameQuery.trim()}$`, 'i'))
+    .populate('menus')
+    .paginate(page, limit);
+
   res.render('bar/bars', { title: 'Bars', bars });
 };
 
