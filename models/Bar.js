@@ -17,7 +17,7 @@ const barSchema = new mongoose.Schema({
   tags: [String],
   cost: {
     type: String,
-    require: true,
+    required: true,
   },
   menus: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -36,7 +36,7 @@ const barSchema = new mongoose.Schema({
   hours: [{
     day: {
       type: String,
-      require: true,
+      required: true,
     },
     open: {
       type: Date,
@@ -44,7 +44,7 @@ const barSchema = new mongoose.Schema({
     },
     close: {
       type: Date,
-      require: true,
+      required: true,
     },
   }],
   location: {
