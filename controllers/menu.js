@@ -25,7 +25,7 @@ exports.editMenu = async (req, res) => {
     .exec();
   if (menu == null) {
     res.flash('error', 'sorry, it seems this menu does\'t exsist');
-    res.redirect('/menu/Add');
+    res.redirect('/menu/add');
   }
   res.render('menu/menu', { title: `${menu.name}`, menu });
 };
