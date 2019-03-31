@@ -1,0 +1,11 @@
+mixin drinkCard(drink = {})
+    .drink
+            h2.title
+            .type
+                for tag in drink.tags
+                    .drink__tag tag
+            .distributor
+                p drink.distributor
+            .ingredients
+                for item in drink.ingredients
+                    li = item

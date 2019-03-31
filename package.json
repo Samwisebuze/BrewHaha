@@ -74,6 +74,7 @@
     "passport-twitter": "^1.0.4",
     "paypal-rest-sdk": "^1.8.1",
     "popper.js": "^1.14.7",
+    "promisify": "0.0.3",
     "pug": "^2.0.3",
     "request": "^2.88.0",
     "sinon": "^6.3.5",

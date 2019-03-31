@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 const {
@@ -263,12 +264,12 @@ exports.getOauthUnlink = (req, res, next) => {
     // As a result, we need to verify that unlinking the provider is safe by ensuring
     // that another login method exists.
     if (
-      !(user.email && user.password) &&
-      tokensWithoutProviderToUnlink.length === 0
+      !(user.email && user.password)
+      && tokensWithoutProviderToUnlink.length === 0
     ) {
       req.flash('errors', {
-        msg: `The ${_.startCase(_.toLower(provider))} account cannot be unlinked without another form of login enabled.` +
-          ' Please link another account or add an email address and password.',
+        msg: `The ${_.startCase(_.toLower(provider))} account cannot be unlinked without another form of login enabled.`
+          + ' Please link another account or add an email address and password.',
       });
       return res.redirect('/account');
     }
@@ -363,19 +364,19 @@ exports.postReset = (req, res, next) => {
       service: 'SendGrid',
       auth: {
         user: process.env.SENDGRID_USER,
-        pass: process.env.SENDGRID_PASSWORD
-      }
+        pass: process.env.SENDGRID_PASSWORD,
+      },
     });
     const mailOptions = {
       to: user.email,
       from: 'hackathon@starter.com',
       subject: 'Your Hackathon Starter password has been changed',
-      text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
+      text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`,
     };
     return transporter.sendMail(mailOptions)
       .then(() => {
         req.flash('success', {
-          msg: 'Success! Your password has been changed.'
+          msg: 'Success! Your password has been changed.',
         });
       })
       .catch((err) => {
@@ -385,22 +386,22 @@ exports.postReset = (req, res, next) => {
             service: 'SendGrid',
             auth: {
               user: process.env.SENDGRID_USER,
-              pass: process.env.SENDGRID_PASSWORD
+              pass: process.env.SENDGRID_PASSWORD,
             },
             tls: {
-              rejectUnauthorized: false
-            }
+              rejectUnauthorized: false,
+            },
           });
           return transporter.sendMail(mailOptions)
             .then(() => {
               req.flash('success', {
-                msg: 'Success! Your password has been changed.'
+                msg: 'Success! Your password has been changed.',
               });
             });
         }
         console.log('ERROR: Could not send password reset confirmation email after security downgrade.\n', err);
         req.flash('warning', {
-          msg: 'Your password has been changed, however we were unable to send you a confirmation email. We will be looking into it shortly.'
+          msg: 'Your password has been changed, however we were unable to send you a confirmation email. We will be looking into it shortly.',
         });
         return err;
       });

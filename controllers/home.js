@@ -1,8 +1,13 @@
+const mongoose = require('mongoose');
+const Bar = require('../models/Bar');
+
+mongoose.Promise = global.Promise;
+
 /**
  * GET /
  * Home page.
  */
-exports.index = (req, res) => {
+exports.index = async (req, res) => {
   res.render('home', {
     title: 'Home',
   });
@@ -13,6 +18,11 @@ exports.index = (req, res) => {
  * List Home Page
  * - Authenticated Homepage
  */
-exports.getHome = (req, res) => res.render('list', {
-  title: 'Bars Near You',
-});
+exports.getHome = async (req, res) => {
+  // Get All Bars
+  const bars = await Bar.find();
+  res.render('list', {
+    title: 'Bars Near You',
+    bars,
+  });
+};

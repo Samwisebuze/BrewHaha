@@ -43,7 +43,9 @@ exports.updateMenu = async (req, res) => {
 
 // GET
 exports.getMenu = async (req, res) => {
-  const menu = await Menu.findOne({ _id: req.params._id }).exec();
+  const menu = await Menu.findOne({ _id: req.params._id })
+    .populate('items.drink')
+    .exec();
   if (menu == null) {
     res.flash('error', 'sorry, it seems this menu doesn\'t exist');
     res.render('menu/menu', { title: 'Menu', menu });

@@ -1,4 +1,5 @@
 include mixins/_rating
+include mixins/_cost
 
 mixin barCard(bar = {})
     .bar
@@ -8,7 +9,7 @@ mixin barCard(bar = {})
         .col-xs-8
           h2.title
             a(href=`/bar/${bar.slug}`) #{bar.name}
-          +ratinag(bar.rating)
+          +rating(bar.rating)
           +cost(bar.cost)
         .bar__hero
             .bar__actions

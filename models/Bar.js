@@ -19,7 +19,10 @@ const barSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  menus: [Number],
+  menus: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Menu',
+  }],
   reviews: [{
     rating: {
       type: Number,
@@ -70,13 +73,19 @@ const barSchema = new mongoose.Schema({
  * preSave Hook
  * - Modifes bar.slug IFF name a has been modified.
  */
-barSchema.pre('save', function preSave(next) {
+barSchema.pre('save', async function preSave(next) {
   // skip it and stop this function from running
   if (!this.isModified('name')) return next();
 
   this.slug = slug(this.name);
+  const slugRegExp = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i');
+  // Find other stores with the same slug
+  const stores = await this.constructor.find()
+    .where('slug').equals(slugRegExp);
+  if (stores.length) {
+    this.slug = `${this.slug}-${stores.length + 1}`;
+  }
   return next();
-  // TODO: Make more resilient so slugs are resilient
 });
 
 module.exports = mongoose.model('Bar', barSchema);
