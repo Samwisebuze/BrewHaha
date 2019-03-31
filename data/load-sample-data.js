@@ -15,13 +15,13 @@ const Drink = require('../models/Menu');
 const User = require('../models/User');
 
 const bars = JSON.parse(fs.readFileSync(`${__dirname
-}/data/bars.json`, 'utf-8'));
+}/bars.json`, 'utf-8'));
 const menus = JSON.parse(fs.readFileSync(`${__dirname
-}/data/menus.json`, 'utf-8'));
+}/menus.json`, 'utf-8'));
 const drinks = JSON.parse(fs.readFileSync(`${__dirname
-}/data/drinks.json`, 'utf-8'));
+}/drinks.json`, 'utf-8'));
 const users = JSON.parse(fs.readFileSync(`${__dirname
-}/data/users.json`, 'utf-8'));
+}/users.json`, 'utf-8'));
 
 
 async function deleteData() {

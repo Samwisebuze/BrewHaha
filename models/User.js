@@ -8,17 +8,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     unique: true,
-    required: true,
+    required: 'Please provide a valid email.',
     index: true,
   },
   username: {
     type: String,
     required: true,
-    unique: true,
+    unique: 'Your username must be unique to reflect who you are!',
   },
   password: {
     type: String,
-    required: true,
+    required: 'You must provide a passowrd.',
   },
   passwordResetToken: String,
   passwordResetExpires: Date,
@@ -26,21 +26,21 @@ const userSchema = new mongoose.Schema({
     name: {
       first: {
         type: String,
-        required: true,
+        required: 'Who are you?',
       },
       last: {
         type: String,
-        required: true,
+        required: 'Who are you?',
       },
     },
     gender: String,
     location: {
       type: String,
-      require: true,
+      require: 'Please provide your home drinking zipcode!',
     },
     birthdate: {
       type: Date,
-      require: true,
+      require: 'Please enter your birthdate.',
     },
     preferences: {
       drinks: [String],
