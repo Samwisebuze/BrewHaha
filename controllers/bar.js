@@ -6,8 +6,8 @@ const Bar = mongoose.model('Bar');
 // === CREATE ===
 // GET
 exports.addBar = (req, res) => {
-  res.render('editBar', {
-    title: 'Add Bar'
+  res.render('bar/editBar', {
+    title: 'Add Bar',
   });
 };
 // POST
@@ -44,7 +44,7 @@ exports.getStoreBySlug = async (req, res) => {
     res.flash('error', 'It appears this bar doesn\'t exist. Let\'s make one!');
     res.redirect('/bars/add');
   }
-  res.render('bar', { title: `${bar.name}`, bar });
+  res.render('bar/bar', { title: `${bar.name}`, bar });
 };
 // GET - One
 exports.getStoreById = async (req, res) => {
@@ -53,13 +53,13 @@ exports.getStoreById = async (req, res) => {
     res.flash('error', 'It appears this bar doesn\'t exist. Let\'s make one!');
     res.redirect('/bars/add');
   }
-  res.render('bar', { title: `${bar.name}`, bar });
+  res.render('bar/bar', { title: `${bar.name}`, bar });
 };
 // GET - List
 exports.getBars = async (req, res) => {
   // Get list of all stores
   const bars = await Bar.find();
-  res.render('bars', { title: 'Bars', bars });
+  res.render('bar/bars', { title: 'Bars', bars });
 };
 
 // === DELETE ===
@@ -71,5 +71,5 @@ exports.deleteBar = async (req, res) => {
     res.redirect(`/bars/${req.params._id}/edit`);
   }
   res.flash('success', `We've removed ${bar.name} from our roster. We're sad to see you go! 😭 Pour one out for ones homies! 🍺`);
-  res.render('/bars');
+  res.render('bar/bars');
 };
