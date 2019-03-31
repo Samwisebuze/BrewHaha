@@ -7,7 +7,7 @@ const Drink = mongoose.model('Drink');
 //== Create ==//
 // GET drink
 exports.addDrink = (req, res) => {
-  res.render('editDrink', { title: 'Add Drink' });
+  res.render('drink/editDrink', { title: 'Add Drink' });
 };
 
 // POST
@@ -25,7 +25,7 @@ exports.editDrink = async (req, res) => {
     res.flash('error', 'It appears this drink doesn\'t exist. Let\'s add it!');
     res.redirect('/drinks/add');
   }
-  res.render('drink', { title: `${drink.name}`, drink });
+  res.render('drink/drink', { title: `${drink.name}`, drink });
 };
 // POST
 exports.updateDrink = async (req, res) => {
@@ -42,13 +42,13 @@ exports.getDrink = async (req, res) => {
   if (drink == null) {
     res.flash('error', 'It appears this drink does\'t exist. Let\'s add it!');
   }
-  res.render('drink', { title: `${drink.name}`, drink });
+  res.render('drink/drink', { title: `${drink.name}`, drink });
 };
 
 // GET - list
 exports.getDrinks = async (req, res) => {
   const drinks = await Drink.find();
-  res.render('drinks', { title: 'Drinks', drinks });
+  res.render('drink/drinks', { title: 'Drinks', drinks });
 };
 
 // DELETE
