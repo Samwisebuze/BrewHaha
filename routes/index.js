@@ -42,7 +42,8 @@ router.delete('/menus/:id/edit', catchErrors(menu.deleteMenu));
 
 // Drink
 // Drink - Get
-router.get('/drinks/:id', catchErrors(drink.getDrink));
+router.get('/drinks/:id', catchErrors(drink.getDrinkById));
+router.get('/drinks/:slug', catchErrors(drink.getDrinkBySlug));
 router.get('/drinks', drink.getDrinks);
 // Drink - Create
 router.get('/drinks/add', drink.addDrink);
