@@ -33,15 +33,21 @@ const drinkSchema = new mongoose.Schema({
  * - Modifes bar.slug IFF name a has been modified.
  * - Don't Create new models if nothing has changed
  */
-drinkSchema.pre('save', function preSave(next) {
+drinkSchema.pre('save', async function preSave(next) {
   // No Change, skip it and stop this function from running
   if (!this.isModified('ingredients')
       || !this.isModified('distributor')
       || !this.isModified('tags')) return next();
   // If Name is Modified Then regen slug
-  if (this.isModified('name')) this.slug = slug(this.name);
-
-  // TODO: Make so slugs are resilient
+  if (!this.isModified('slug')) {
+    const slugRegExp = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i');
+    // Find other stores with the same slug
+    const stores = await this.constructor.find()
+      .where('slug').equals(slugRegExp);
+    if (stores.length) {
+      this.slug = `${this.slug}-${stores.length + 1}`;
+    }
+  }
   return next();
 });
 

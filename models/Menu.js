@@ -12,6 +12,10 @@ const menuSchema = new mongoose.Schema({
       type: String,
       require: true,
     },
+    drink: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Drink',
+    },
     name: {
       type: String,
       require: true,

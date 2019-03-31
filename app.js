@@ -20,6 +20,7 @@ const expressValidator = require('express-validator'); // ?
 const expressStatusMonitor = require('express-status-monitor'); // ?
 const sass = require('node-sass-middleware'); // ?
 const multer = require('multer'); // ? for uploads
+const promisify = require('promisify');
 const helpers = require('./helpers');
 const routes = require('./routes/index');
 const errorHandlers = require('./handlers/errorHandlers');
@@ -115,18 +116,10 @@ app.use((req, res, next) => {
   res.locals.currentPath = req.path;
   next();
 });
+
+// promisify some callback based APIs
 app.use((req, _res, next) => {
-  // After successful login, redirect back to the intended page
-  if (!req.user
-    && req.path !== '/login'
-    && req.path !== '/signup'
-    && !req.path.match(/^\/auth/)
-    && !req.path.match(/\./)) {
-    req.session.returnTo = req.originalUrl;
-  } else if (req.user
-    && (req.path === '/account' || req.path.match(/^\/api/))) {
-    req.session.returnTo = req.originalUrl;
-  }
+  req.login = promisify(req.login, req);
   next();
 });
 
