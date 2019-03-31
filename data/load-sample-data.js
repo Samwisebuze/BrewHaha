@@ -6,6 +6,7 @@ require('dotenv').config({
 const fs = require('fs');
 
 const mongoose = require('mongoose');
+
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
 
@@ -15,13 +16,13 @@ const Drink = require('../models/Menu');
 const User = require('../models/User');
 
 const bars = JSON.parse(fs.readFileSync(`${__dirname
-}/bars.json`, 'utf-8'));
+}/Bars.json`, 'utf-8'));
 const menus = JSON.parse(fs.readFileSync(`${__dirname
-}/menus.json`, 'utf-8'));
+}/Menus.json`, 'utf-8'));
 const drinks = JSON.parse(fs.readFileSync(`${__dirname
-}/drinks.json`, 'utf-8'));
+}/Drinks.json`, 'utf-8'));
 const users = JSON.parse(fs.readFileSync(`${__dirname
-}/users.json`, 'utf-8'));
+}/Users.json`, 'utf-8'));
 
 
 async function deleteData() {
