@@ -1,8 +1,10 @@
 .navbar.navbar-light.fixed-top.navbar-expand-lg
   .container
-    a.navbar-brand(href='/')
-      i.fas
-      | Filter
+    a(href=`/home`)
+      != h.icon('favicon') || 'icon'
+    //- a.navbar-brand(href='/')
+    //-   i.fas
+    //-   | Filter
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='.navbar-collapse')
       span.sr-only Toggle navigation
       span.navbar-toggler-icon
@@ -10,9 +12,9 @@
       ul.nav.navbar-nav.ml-auto
         if !user
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)
-            a.nav-link(href='/login') Bars
+            a.nav-link(href='/bars') Bars
           li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
-            a.nav-link(href='/signup') Drinks
+            a.nav-link(href='/drinks') Drinks
         else
           li.dropdown(class=(title === 'Account Management') ? 'active' : undefined).nav-item
             a.dropdown-toggle.nav-link(href='#', data-toggle='dropdown')
