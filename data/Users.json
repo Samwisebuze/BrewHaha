@@ -1,0 +1,38 @@
+{ "users" : [
+    {"email": "alex@vennemeyer.com",
+        "username": "vennemar",
+        "password" : "alex",
+        "profile": { 
+            "name":{
+                "first": "Alex",
+                "last": "Vennemeyer"
+            },
+            "location": "45219",
+            "birthdate": "2013-01-08"
+        }
+    },
+    {"email": "maddie@eckhart.com",
+        "username": "eckharme",
+        "password" : "maddie",
+        "profile": { 
+            "name":{
+                "first": "Maddie",
+                "last": "Eckhart"
+            },
+            "location": "45219",
+            "birthdate": "2013-01-08"
+        }
+    },
+    {"email": "sam@buzas.com",
+        "username": "buzassg",
+        "password" : "sam",
+        "profile": { 
+            "name":{
+                "first": "Sam",
+                "last": "Buzas"
+            },
+            "location": "45219",
+            "birthdate": "2013-01-08"
+        }
+    },
+]}
