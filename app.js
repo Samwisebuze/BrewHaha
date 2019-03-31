@@ -67,7 +67,7 @@ app.use(sass({
 
 // Setup Request logging using morgan
 // the input string takes pre-defined tokens or templates
-app.use(logger('short'));
+app.use(logger('dev'));
 // Takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -163,7 +163,7 @@ app.use(errorHandlers.productionErrors);
 app.listen(app.get('port'), () => {
   if (app.get('env') === 'development') {
     console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
-    console.log('  Press CTRL-C to stop\n');
+    console.log('%s Press CTRL-C to stop\n', chalk.red('☒'));
   }
 });
 
