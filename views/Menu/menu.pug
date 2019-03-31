@@ -2,4 +2,10 @@ extends layout
 include mixins/_menuCard.pug
 
 block content
-+menuCard(menu)
+.modal
+    .modal-content
+        .modal-header
+            button(class='close', data-dismiss: "modal")
+            h4.title
+        .modal-body
+            +menuCard(menu)

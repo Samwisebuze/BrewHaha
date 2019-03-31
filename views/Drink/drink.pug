@@ -2,4 +2,10 @@ extends layout
 include mixins/_drinkCard
 
 block content
-+drinkCard(drink)
+.modal
+    .modal-content
+        .modal-header
+            button(class='close', data-dismiss: "modal")
+            h4.title
+        .modal-body
+            +drinkCard(drink)
