@@ -1,0 +1,49 @@
+{"drinks":[
+    {"name":"Budweiser",
+        "type": "lager",
+        "Destributor":"Budweiser"
+    },
+    {"name":"Truth",
+        "type": "beer",
+        "tags": "IPA",
+        "Destributor":"Rhinegeist"
+    },
+    {"name":"PsychHOPathy",
+        "type": "beer",
+        "tags": "IPA",
+        "Destributor":"MadTree"
+    },
+    {"name":"Nopal",
+        "type": "beer",
+        "tags": "Pale Ale",
+        "Destributor":"MadTree"
+    },
+    {"name":"Jameson",
+        "type": "spirit",
+        "tags": "Whiskey",
+        "Destributor":"Jameson Co"
+    },
+    {"name":"Jack Daniels",
+        "type": "spirit",
+        "tags": "Whiskey",
+        "Destributor":"Jack Daniels Co"
+    },
+    {"name":"Smirnoff",
+        "type": "spirit",
+        "tags": "vodka",
+        "Destributor":"Smirnoff"
+    },
+    {"name":"Grey Goose",
+        "type": "spirit",
+        "tags": "vodka",
+        "Destributor":"Grey Goose"
+    },
+    {"name":"Chardonnay",
+        "type": "wine",
+        "Destributor":"Beringer"
+    },
+    {"name":"Merlot",
+        "type": "wine",
+        "Destributor":"Yellow Tail"
+    }
+]}

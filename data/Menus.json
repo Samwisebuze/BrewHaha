@@ -1,0 +1,22 @@
+{ "menus": [
+    {"type": "beer",
+        "items": [
+            {"name":"Budweiser",
+                "price": 5.67,
+                "tags": "Lager"
+            },
+            {"name":"Truth",
+                "price": 8.45,
+                "tags": "IPA"
+            },
+            {"name":"PsychHOPathy",
+                "price": 7.56,
+                "tags": "IPA"  
+            },
+            {"name":"Nopal",
+                "price": 7.86,
+                "tags": "Pale Ale"
+            }
+        ]
+    }
+]}
