@@ -65,8 +65,9 @@ app.use(sass({
   dest: path.join(__dirname, 'public'),
 }));
 
-// Setup Logging And Log Level
-app.use(logger('dev'));
+// Setup Request logging using morgan
+// the input string takes pre-defined tokens or templates
+app.use(logger('short'));
 // Takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

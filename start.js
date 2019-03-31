@@ -9,15 +9,18 @@ mongoose.set('useNewUrlParser', true);
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises -- enables async/await use
 mongoose.connection.on('error', (err) => {
-    // eslint-disable-next-line no-console
-    console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
+  // eslint-disable-next-line no-console
+  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
 
 // READY?! Let's go!
 
 // import all models
 require('./models/User');
+require('./models/Bar');
+require('./models/Drink');
+require('./models/Menu');
 
 // Start our app!
+// eslint-disable-next-line no-unused-vars
 const app = require('./app');
-
