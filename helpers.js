@@ -25,7 +25,7 @@ exports.getSeedData = (name) => {
 };
 
 // Google Analytics API
-exports.GoogleAnalytics = () => process.env.GOOGLE_ANALYTICS_KEY.toString();
+exports.GoogleAnalytics = () => process.env.GOOGLE_ANALYTICS_KEY;
 
 // Making a static map is really long - this is a handy helper function to make one
 exports.staticMap = ([lng, lat]) => `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=800x150&key=${process.env.MAP_KEY}&markers=${lat},${lng}&scale=2`;
