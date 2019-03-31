@@ -20,7 +20,8 @@ exports.index = async (req, res) => {
  */
 exports.getHome = async (req, res) => {
   // Get All Bars
-  const bars = await Bar.find();
+  const bars = await Bar.find()
+    .exec();
   res.render('list', {
     title: 'Bars Near You',
     bars,

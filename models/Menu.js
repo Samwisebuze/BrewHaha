@@ -5,12 +5,12 @@ mongoose.Promise = global.Promise;
 const menuSchema = new mongoose.Schema({
   type: {
     type: String,
-    require: true,
+    required: true,
   },
   items: [{
     type: {
       type: String,
-      require: true,
+      required: true,
     },
     drink: {
       type: mongoose.Schema.Types.ObjectId,
@@ -18,11 +18,11 @@ const menuSchema = new mongoose.Schema({
     },
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     price: {
       type: Number,
-      require: true,
+      required: true,
     },
     tags: [{
       type: String,

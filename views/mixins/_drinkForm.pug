@@ -1,0 +1,28 @@
+mixin drinkForm(drink = {})
+    - const drinkSeedData = h.getSeedData(drink.type).tags;
+    form(action=`/add/${drink._id || ''}`, method="POST" 
+	class="card")
+		label(for="name") Name
+		input(type="text" name="name" value=drink.name)
+        label(for="type")
+        input(type="dropdown", name="type" required)=drink.type
+        label(for="Distributor") Distributor
+		input(type="text" id="Distributor" name="Distributor")=drink.distributor
+		label(for="Ingredients") Ingredients
+		textarea(type="text" name="ingredients")= drink.ingredients
+
+
+		- const type = ['beer','wine','cocktail','spirit']
+        - const tags = drink.tags || drinkSeedData
+		ul.tags
+			each choice in drinkSeedData.tags
+				.tag.tag__choice
+					input(
+						type="checkbox" 
+						id=choice 
+						value=choice 
+						name="tags"
+						checked=(tags.includes(choice))
+					)
+					label(for=choice) #{choice}
+		input(type="submit", value="Save" class="button")

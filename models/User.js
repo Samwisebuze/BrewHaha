@@ -8,29 +8,29 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     unique: true,
+    required: true,
     index: true,
   },
   username: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   password: {
     type: String,
-    require: true,
+    required: true,
   },
   passwordResetToken: String,
   passwordResetExpires: Date,
-
   profile: {
     name: {
       first: {
         type: String,
-        require: true,
+        required: true,
       },
       last: {
         type: String,
-        require: true,
+        required: true,
       },
     },
     gender: String,

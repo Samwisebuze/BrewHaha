@@ -64,7 +64,8 @@ exports.getBars = async (req, res) => {
   const bars = await Bar.find()
     .where('name').equals(new RegExp(`^${nameQuery.trim()}$`, 'i'))
     .populate('menus')
-    .paginate(page, limit);
+    .paginate(page, limit)
+    .exec();
 
   res.render('bar/bars', { title: 'Bars', bars });
 };
