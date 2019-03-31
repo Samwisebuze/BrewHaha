@@ -1,9 +1,9 @@
 mixin drinkCard(drink = {})
     .drink
-        .row
             h2.title
             .type
-                p drink.type
+                for tag in drink.tags
+                    .drink__tag tag
             .distributor
                 p drink.distributor
             .ingredients
