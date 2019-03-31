@@ -36,15 +36,15 @@ const barSchema = new mongoose.Schema({
   hours: [{
     day: {
       type: String,
-      required: true,
+      required: '8 days a week',
     },
     open: {
       type: Date,
-      require: true,
+      require: 'What Time do you Open?',
     },
     close: {
       type: Date,
-      required: true,
+      required: 'What Time do you Open?',
     },
   }],
   location: {

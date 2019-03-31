@@ -6,9 +6,10 @@ const Bar = mongoose.model('Bar');
 // === CREATE ===
 // GET
 exports.addBar = (req, res) => {
+  const bar = new Bar();
   res.render('bar/editBar', {
     title: 'Add Bar',
-  });
+  }, bar);
 };
 // POST
 exports.createBar = async (req, res) => {
@@ -20,15 +21,22 @@ exports.createBar = async (req, res) => {
 // === Edit ===
 // GET
 exports.editBar = async (req, res) => {
-  const bar = await Bar.findOne({ _id: req.params.id });
+  const bar = await Bar.findOne({
+    _id: req.params.id,
+  });
   // TODO: Confirm user owns the store
-  res.render('editBar', { title: `Edit ${bar.name}`, bar });
+  res.render('bar/editBar', {
+    title: `Edit ${bar.name}`,
+    bar,
+  });
 };
 // POST
 exports.updateBar = async (req, res) => {
   // Set Location data to be a point
   req.body.location.type = 'Point';
-  const bar = await Bar.findOneAndUpdate({ _id: req.params.id }, req.body, {
+  const bar = await Bar.findOneAndUpdate({
+    _id: req.params.id,
+  }, req.body, {
     new: true, // return the newly updated store data
     runValidators: true,
   }).exec();
@@ -39,21 +47,31 @@ exports.updateBar = async (req, res) => {
 // === READ ===
 // GET - One
 exports.getStoreBySlug = async (req, res) => {
-  const bar = await Bar.findOne({ slug: req.params.slug });
+  const bar = await Bar.findOne({
+    slug: req.params.slug,
+  });
   if (bar === null) {
     res.flash('error', 'It appears this bar doesn\'t exist. Let\'s make one!');
     res.redirect('/bars/add');
   }
-  res.render('bar/bar', { title: `${bar.name}`, bar });
+  res.render('bar/bar', {
+    title: `${bar.name}`,
+    bar,
+  });
 };
 // GET - One
 exports.getStoreById = async (req, res) => {
-  const bar = await Bar.findOne({ _id: req.params.id });
+  const bar = await Bar.findOne({
+    _id: req.params.id,
+  });
   if (bar === null) {
     res.flash('error', 'It appears this bar doesn\'t exist. Let\'s make one!');
     res.redirect('/bars/add');
   }
-  res.render('bar/bar', { title: `${bar.name}`, bar });
+  res.render('bar/bar', {
+    title: `${bar.name}`,
+    bar,
+  });
 };
 // GET - List
 exports.getBars = async (req, res) => {
@@ -64,16 +82,20 @@ exports.getBars = async (req, res) => {
   const bars = await Bar.find()
     .where('name').equals(new RegExp(`^${nameQuery.trim()}$`, 'i'))
     .populate('menus')
-    .paginate(page, limit)
     .exec();
 
-  res.render('bar/bars', { title: 'Bars', bars });
+  res.render('bar/bars', {
+    title: 'Bars',
+    bars,
+  });
 };
 
 // === DELETE ===
 exports.deleteBar = async (req, res) => {
   // Find and Delete Store
-  const bar = await Bar.findOneAndDelete({ _id: req.params._id }).exec();
+  const bar = await Bar.findOneAndDelete({
+    _id: req.params._id,
+  }).exec();
   if (bar === null) {
     res.flash('error', 'I\'m sorry Dave, I can\'t do that for you.');
     res.redirect(`/bars/${req.params._id}/edit`);

@@ -3,13 +3,13 @@ mixin barForm(bar = {})
 	form(action=`/add/${bar._id || ''}`, method="POST" 
 	class="card")
 		label(for="name") Name
-		input(type="text" name="name" value=bar.name)
+		input(type="text" name="name" value=bar.name required)
 		label(for="description") Description
-		textarea(type="text" name="description")= bar.description
+		textarea(type="text" name="description" value= bar.description required) 
 		//- Address
 		label(for="address") Address 
 		input(type="text" id="address" name="location[address]" 
-		value=(bar.location && bar.location.address))
+		value=(bar.location && bar.location.address) required)
 		//- Addres LNG
 		input(type="text" hidden id="lng" name="location[coordinates][0]" 
 		value=(bar.location && bar.location.coordinates[0]) required)
