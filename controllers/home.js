@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
  */
 exports.index = async (req, res) => {
   res.render('home', {
-    title: 'Home',
+    title: 'BrewHaHa',
   });
 };
 
