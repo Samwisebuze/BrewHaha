@@ -77,12 +77,19 @@ exports.getStoreById = async (req, res) => {
 exports.getBars = async (req, res) => {
   const page = req.query.page || 1;
   const limit = req.query.limit || 25;
-  const nameQuery = req.query.name || '';
+  let nameRegExp = null;
+  if (req.params.name) {
+    nameRegExp = new RegExp(`^${req.paramas.name || ''}$`, 'i');
+  }
   // Get list of all stores
-  const bars = await Bar.find()
-    .where('name').equals(new RegExp(`^${nameQuery.trim()}$`, 'i'))
-    .populate('menus')
-    .exec();
+  let bars = [];
+  if (nameRegExp !== null) {
+    bars = await Bar.find({ name: nameRegExp})
+      .exec();
+  } else {
+    bars = await Bar.find()
+      .exec();
+  }
 
   res.render('bar/bars', {
     title: 'Bars',

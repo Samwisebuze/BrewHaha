@@ -6,15 +6,12 @@ mongoose.Promise = global.Promise;
 const drinkSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: 'Please provide a name.',
   },
-  slug: {
-    type: String,
-    required: true,
-  },
+  slug: String,
   type: {
     type: String,
-    required: true,
+    required: 'Please select a type.',
   },
   tags: [{
     type: String,
@@ -24,21 +21,17 @@ const drinkSchema = new mongoose.Schema({
   }],
   distributor: {
     type: String,
-    required: true,
+    required: 'Please list the distributor.',
   },
 });
 
 /**
  * preSave Hook
- * - Modifes bar.slug IFF name a has been modified.
+ * - Modifys drink.slug IFF name a has been modified.
  * - Don't Create new models if nothing has changed
  */
 drinkSchema.pre('save', async function preSave(next) {
-  // No Change, skip it and stop this function from running
-  if (!this.isModified('ingredients')
-      || !this.isModified('distributor')
-      || !this.isModified('tags')) return next();
-  // If Name is Modified Then regen slug
+  // If edit slug IFF name is added/changed
   if (!this.isModified('slug')) {
     this.slug = slug(this.name);
     const slugRegExp = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i');

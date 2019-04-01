@@ -1,58 +1,59 @@
-[{
+[
+    {
         "name": "Budweiser",
         "type": "lager",
-        "Destributor": "Budweiser"
+        "distributor": "Budweiser"
     },
     {
         "name": "Truth",
         "type": "beer",
         "tags": "IPA",
-        "Destributor": "Rhinegeist"
+        "distributor": "Rhinegeist"
     },
     {
         "name": "PsychHOPathy",
         "type": "beer",
         "tags": "IPA",
-        "Destributor": "MadTree"
+        "distributor": "MadTree"
     },
     {
         "name": "Nopal",
         "type": "beer",
         "tags": "Pale Ale",
-        "Destributor": "MadTree"
+        "distributor": "MadTree"
     },
     {
         "name": "Jameson",
         "type": "spirit",
         "tags": "Whiskey",
-        "Destributor": "Jameson Co"
+        "distributor": "Jameson Co"
     },
     {
         "name": "Jack Daniels",
         "type": "spirit",
         "tags": "Whiskey",
-        "Destributor": "Jack Daniels Co"
+        "distributor": "Jack Daniels Co"
     },
     {
         "name": "Smirnoff",
         "type": "spirit",
         "tags": "vodka",
-        "Destributor": "Smirnoff"
+        "distributor": "Smirnoff"
     },
     {
         "name": "Grey Goose",
         "type": "spirit",
         "tags": "vodka",
-        "Destributor": "Grey Goose"
+        "distributor": "Grey Goose"
     },
     {
         "name": "Chardonnay",
         "type": "wine",
-        "Destributor": "Beringer"
+        "distributor": "Beringer"
     },
     {
         "name": "Merlot",
         "type": "wine",
-        "Destributor": "Yellow Tail"
+        "distributor": "Yellow Tail"
     }
 ]
