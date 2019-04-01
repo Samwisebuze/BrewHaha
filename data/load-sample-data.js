@@ -17,14 +17,10 @@ const Menu = require('../models/Menu');
 const Drink = require('../models/Menu');
 const User = require('../models/User');
 
-const bars = JSON.parse(fs.readFileSync(`${__dirname
-}/Bars.json`, 'utf-8'));
-const menus = JSON.parse(fs.readFileSync(`${__dirname
-}/Menus.json`, 'utf-8'));
-const drinks = JSON.parse(fs.readFileSync(`${__dirname
-}/Drinks.json`, 'utf-8'));
-const users = JSON.parse(fs.readFileSync(`${__dirname
-}/Users.json`, 'utf-8'));
+const bars = JSON.parse(fs.readFileSync(`${__dirname}/Bars.json`, 'utf-8'));
+const menus = JSON.parse(fs.readFileSync(`${__dirname}/Menus.json`, 'utf-8'));
+const drinks = JSON.parse(fs.readFileSync(`${__dirname}/Drinks.json`, 'utf-8'));
+const users = JSON.parse(fs.readFileSync(`${__dirname}/Users.json`, 'utf-8'));
 
 
 async function deleteData() {
@@ -33,7 +29,7 @@ async function deleteData() {
   await Menu.remove();
   await Drink.remove();
   await User.remove();
-  console.log('Data Removed! To load sample data run\n\n npm run sampl \n\n');
+  console.log('Data Removed! To load sample data run\n\n npm run sample \n\n');
   process.exit();
 }
 

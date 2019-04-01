@@ -1,7 +1,6 @@
 mixin barForm(bar = {})
 	- const barSeedData = h.getSeedData('bar').tags
-	form(action=`/add/${bar._id || ''}`, method="POST" 
-	class="card")
+	form(action=`/add/${bar._id || ''}`, method="POST" class="card")
 		label(for="name") Name
 		input(type="text" name="name" value=bar.name required)
 		label(for="description") Description

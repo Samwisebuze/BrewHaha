@@ -1,20 +1,18 @@
-mixin barCard(bar = {})
-    .bar
+mixin barCard(bar = {}, fullCard=false)
       .row
         .col-xs-4
           img(src=`/uploads/${bar.photo || 'bar.png'}`)
         .col-xs-8
           h2.title
             a(href=`/bar/${bar.slug}`) #{bar.name}
-        if block 
+        if block // ratings and Cost
           block
+        if fullCard
         .bar__hero
-            .bar__actions
-                .bar__action.bar__action--edit
-                    a(href=`/bars/${store._id}/edit`)
-                        != h.icon('pencil') || 'edit'
-            img(src=`/uploads/${store.photo || 'bar.png'}`)
-            h2.title
-                a(href=`/bar/${bar.slug}`) #{bar.name}
-        .bar__details
+          .bar__actions
+            .bar__action.bar__action--edit
+              a(href=`/bars/${store._id}/edit`)
+                != h.icon('pencil') || 'edit'
+          zimg(src=`/uploads/${store.photo || 'bar.png'}`)
+          .bar__details
             p= bar.description.split(' ').slice(0, 25).join(' ')
