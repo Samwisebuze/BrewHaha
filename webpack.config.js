@@ -29,7 +29,7 @@ const javascript = {
 const postcss = {
   loader: 'postcss-loader',
   options: {
-    plugins() { return [autoprefixer({ browsers: 'last 3 versions' })]; }
+    plugins() { return [autoprefixer({ browsers: 'last 3 versions' })]; },
   },
 };
 
@@ -40,7 +40,7 @@ const styles = {
   // remember above we used an object for each loader instead of just a string?
   // We don't just pass an array of loaders,
   // we run them through the extract plugin so they can be outputted to their own .css file
-  use: ExtractTextPlugin.extract(['css-loader?sourceMap', postcss, 'sass-loader?sourceMap'])
+  use: ExtractTextPlugin.extract(['css-loader?sourceMap', postcss, 'sass-loader?sourceMap']),
 };
 
 // We can also use plugins - this one will compress the crap out of our JS

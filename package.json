@@ -27,6 +27,7 @@
     "@ladjs/bootstrap-social": "^7.0.2",
     "@octokit/rest": "^16.16.0",
     "acorn": "^6.1.1",
+    "autoprefixer": "^9.5.0",
     "axios": "^0.18.0",
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
@@ -46,6 +47,7 @@
     "express-session": "^1.15.6",
     "express-status-monitor": "^1.2.3",
     "express-validator": "^5.3.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "fbgraph": "^1.4.4",
     "instagram-node": "^0.5.8",
     "jquery": "^3.3.1",
@@ -83,7 +85,8 @@
     "tumblr.js": "^2.0.0",
     "twilio": "^3.28.1",
     "twit": "^2.2.11",
-    "validator": "^10.11.0"
+    "validator": "^10.11.0",
+    "webpack": "^3.12.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
