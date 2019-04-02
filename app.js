@@ -3,22 +3,19 @@
  * Module dependencies.
  */
 const express = require('express'); // Web Framework
-const compression = require('compression'); // ?
 const session = require('express-session'); // ? sessions allow us to have tracked interactions with users
 const bodyParser = require('body-parser'); // Parses the body of an HTTP Request so we don't have to
+const promisify = require('es6-promisify');
 const logger = require('morgan'); // ? Logging is cool
 const chalk = require('chalk'); // ?
-const lusca = require('lusca'); // ?
 const dotenv = require('dotenv'); // Makes out ENV file readable like an object
 const MongoStore = require('connect-mongo')(session); // ?
-const flash = require('express-flash'); // Popup messages!!
+const flash = require('connect-flash'); // Popup messages!!
 const path = require('path'); // ?
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose'); // MongoDB ORM
 const passport = require('passport'); // User Authentications
 const expressValidator = require('express-validator'); // ?
-const expressStatusMonitor = require('express-status-monitor'); // ?
-const sass = require('node-sass-middleware'); // ?
 const multer = require('multer'); // ? for uploads
 const helpers = require('./helpers');
 const routes = require('./routes/index');
@@ -57,16 +54,6 @@ app.set('view engine', 'pug');
 // Anything in public/ will just be served up as the file it is
 app.use(express.static(path.join(__dirname, 'public')));
 
-/**
- * Status Monitor on site
- */
-app.use(expressStatusMonitor());
-app.use(compression());
-app.use(sass({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-}));
-
 // Setup Request logging using morgan
 // the input string takes pre-defined tokens or templates
 app.use(logger('dev'));
@@ -97,17 +84,6 @@ app.use(passport.session());
 // which will then pass that message to the next page the user requests
 app.use(flash());
 
-app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
-    next();
-  } else {
-    lusca.csrf()(req, res, next);
-  }
-});
-app.use(lusca.xframe('SAMEORIGIN'));
-app.use(lusca.xssProtection(true));
-app.disable('x-powered-by');
-
 // Setup Helpers
 // to pass variables to our templates + all requests
 app.use((req, res, next) => {
@@ -118,21 +94,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  // After successful login, redirect back to the intended page
-  if (!req.user
-    && req.path !== '/login'
-    && req.path !== '/signup'
-    && !req.path.match(/^\/auth/)
-    && !req.path.match(/\./)) {
-    req.session.returnTo = req.originalUrl;
-  } else if (req.user
-    && (req.path === '/account' || req.path.match(/^\/list/))) {
-    req.session.returnTo = req.originalUrl;
-  }
+// promisify some callback based APIs
+app.use((req, _res, next) => {
+  req.login = promisify(req.login, req);
   next();
 });
-
 app.use('/', express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/chart.js/dist'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd'), { maxAge: 31557600000 }));

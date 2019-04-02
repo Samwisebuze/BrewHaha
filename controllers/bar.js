@@ -24,7 +24,7 @@ exports.editBar = async (req, res) => {
   const bar = await Bar.findOne({
     _id: req.params.id,
   });
-  // TODO: Confirm user owns the store
+  // TODO: Confirm user owns the Bar
   res.render('bar/editBar', {
     title: `Edit ${bar.name}`,
     bar,
@@ -45,8 +45,8 @@ exports.updateBar = async (req, res) => {
 };
 
 // === READ ===
-// GET - One
-exports.getStoreBySlug = async (req, res) => {
+// GET - One - BySlug
+exports.getBarBySlug = async (req, res) => {
   const bar = await Bar.findOne({
     slug: req.params.slug,
   });
@@ -59,8 +59,9 @@ exports.getStoreBySlug = async (req, res) => {
     bar,
   });
 };
-// GET - One
-exports.getStoreById = async (req, res) => {
+
+// GET - One - byId
+exports.getBarById = async (req, res) => {
   const bar = await Bar.findOne({
     _id: req.params.id,
   });
@@ -75,21 +76,12 @@ exports.getStoreById = async (req, res) => {
 };
 // GET - List
 exports.getBars = async (req, res) => {
-  const page = req.query.page || 1;
-  const limit = req.query.limit || 25;
-  let nameRegExp = null;
-  if (req.params.name) {
-    nameRegExp = new RegExp(`^${req.paramas.name || ''}$`, 'i');
-  }
-  // Get list of all stores
-  let bars = [];
-  if (nameRegExp !== null) {
-    bars = await Bar.find({ name: nameRegExp})
-      .exec();
-  } else {
-    bars = await Bar.find()
-      .exec();
-  }
+  // const page = req.query.page || 1;
+  // const limit = req.query.limit || 25;
+  const nameRegExp = new RegExp(`^${req.paramas.name || '*'}$`, 'i');
+  // Get list of all bars
+  const bars = await Bar.find({ name: nameRegExp })
+    .exec();
 
   res.render('bar/bars', {
     title: 'Bars',
@@ -99,7 +91,7 @@ exports.getBars = async (req, res) => {
 
 // === DELETE ===
 exports.deleteBar = async (req, res) => {
-  // Find and Delete Store
+  // Find and Delete Bar
   const bar = await Bar.findOneAndDelete({
     _id: req.params._id,
   }).exec();

@@ -12,13 +12,13 @@ const { catchErrors } = require('../handlers/errorHandlers');
 
 // Home - Index
 router.get('/', home.index);
+router.get('/home', home.getHome);
 /**
  * I GOT BARS
  */
 // Bar - Get
 router.get('/bars', catchErrors(bar.getBars));
-router.get('/bar/:slug', catchErrors(bar.getBarBySlug));
-router.get('/bar/:id', catchErrors(bar.getBarById));
+router.get('/bars/:slug', catchErrors(bar.getBarById));
 // Bar - Add
 router.get('/bars/add', bar.addBar);
 router.post('/bars/add', catchErrors(bar.createBar));
@@ -30,7 +30,8 @@ router.delete('/bars/delete/:id', catchErrors(bar.deleteStore));
 
 // Menu
 // Menu - Get
-router.get('/menu/:id', catchErrors(menu.getMenu));
+router.get('/menus', catchErrors(menu.getMenus));
+router.get('/menus/:id', catchErrors(menu.getMenu));
 // Menu - Create
 router.get('/menus/add', menu.addMenu);
 router.post('/menus/add', catchErrors(menu.postMenu));

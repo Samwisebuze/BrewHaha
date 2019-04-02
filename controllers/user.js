@@ -7,7 +7,6 @@ const {
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
-const _ = require('lodash');
 const User = require('../models/User');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
@@ -29,7 +28,7 @@ exports.getLogin = (req, res) => {
  * POST /login
  * Sign in using email and password.
  */
-exports.postLogin = (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Password cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail({
@@ -43,24 +42,7 @@ exports.postLogin = (req, res, next) => {
     return res.redirect('/login');
   }
 
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      req.flash('errors', info);
-      return res.redirect('/login');
-    }
-    req.logIn(user, (loginErr) => {
-      if (loginErr) {
-        return next(loginErr);
-      }
-      req.flash('success', {
-        msg: 'Success! You are logged in.',
-      });
-      return res.redirect(req.session.returnTo || '/');
-    });
-  })(req, res, next);
+  await passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/login' })(req, res, next);
 };
 
 /**

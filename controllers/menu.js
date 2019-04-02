@@ -14,7 +14,7 @@ exports.addMenu = async (req, res) => {
 exports.postMenu = async (req, res) => {
   const menu = await (new Menu(req.body)).save();
   res.flash('sucess', 'Menu Added');
-  res.redirect(`/menu/${menu.bar_id}`); // make sure bar_id is added to menu model
+  res.redirect(`/menu/${menu.bar_id}`);
 };
 
 //== Edit ==//
@@ -24,7 +24,6 @@ exports.editMenu = async (req, res) => {
     .where('_id').equals(req.params.id)
     .exec();
   if (menu == null) {
-    res.flash('error', 'sorry, it seems this menu does\'t exsist');
     res.redirect('/menu/add');
   }
   res.render('menu/menu', { title: `${menu.name}`, menu });
@@ -52,9 +51,17 @@ exports.getMenu = async (req, res) => {
     .populate('items.drink')
     .exec();
   if (menu == null) {
-    res.flash('error', 'sorry, it seems this menu doesn\'t exist');
-    res.render('menu/menu', { title: 'Menu', menu });
+    res.flash('error', 'Sorry, it seems this menu doesn\'t exist');
+    res.redirect('/home');
   }
+  res.render('menu/menu', { title: 'Menu', menu });
+};
+
+//GET - List
+exports.getMenus = async (req, res) => {
+  const menus = await Menu.find()
+    .exec();
+  res.send(menus);
 };
 
 // DELETE

@@ -5,5 +5,5 @@ if locals.flashes
       each category in categories
         each message in flashes[category]
           .flash(class=`flash--${category}`)
-            p.flash__text!= message
+            p.flash__text!= h.dump(message)
             button.flash__remove(onClick="this.parentElement.remove()") &times;

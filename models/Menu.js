@@ -7,6 +7,10 @@ const menuSchema = new mongoose.Schema({
     type: String,
     required: 'What type of Menu is this? Beer, Wine, Cheese?',
   },
+  bar_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Bar',
+  },
   items: [{
     type: {
       type: String,
